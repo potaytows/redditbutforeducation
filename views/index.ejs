@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./partials/head.ejs')%>
-<body>
-This is index for the page
-
-</body>
+    <body>
+    <%- include('./partials/header.ejs')%>
+        <div class="container">
+            
+            <%if(cookies.isLoggedin=="loggedin"){%>
+                <div class="alert alert-success" role="alert">
+                    Logged in succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.isLoggedout=="true"){%>
+                <div class="alert alert-success" role="alert">
+                    Logged out succesfully!!
+                </div>
+            <%}%>
+            
+                
+        </div>
+    <%- include('./partials/footer.ejs')%>
+    </body>
 </html>
