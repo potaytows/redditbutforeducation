@@ -37,7 +37,7 @@ const uri = "mongodb://localhost:27017/project";
 
 mongoose.connect(uri)
     .then((result)=> app.listen(3000, () => {
-        console.log('Api is running on port 3000 http://localhost:3000/');
+        console.log('App is running on port 3000 http://localhost:3000/');
     }))
     .catch((err) => console.log(err))
 app.use(function(req, res, next) {
