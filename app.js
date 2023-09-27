@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/user',userRouter);
 
-const uri = "mongodb+srv://takachiy:FkGs77eVDT4ezosv@cluster0.xoovbhu.mongodb.net/reddeetznuts?retryWrites=true&w=majority";
+const uri = "mongodb://localhost:27017/project";
 
 mongoose.connect(uri)
     .then((result)=> app.listen(3000, () => {
