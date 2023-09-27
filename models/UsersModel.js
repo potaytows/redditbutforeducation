@@ -16,7 +16,7 @@ const UsersSchema = new mongoose.Schema({
         type:Number,
         default:0
     }
-},{timeseries:true})
+},{timestamps:true})
 
 
 module.exports = mongoose.model('User',UsersSchema)

@@ -13,9 +13,13 @@ const page_login = (req, res,) => {
 };
 
 const page_register = (req, res,) => {
-  console.log(user)
-  res.render('register', { pageTitle: 'Reddeetznuts : Register' });
-
+  Users.find({},{'email':1,'_id':0})
+  .then((result)=>{
+    res.render('register', { pageTitle: 'Reddeetznuts : Register',usedEmail : result });
+    
+}).catch((err)=>{
+  console.log(err)
+})
 };
 const logout = (req,res)=>{
   req.session.destroy();
