@@ -13,11 +13,6 @@ const page_login = (req, res,) => {
 };
 
 const page_register = (req, res,) => {
-
-  Users.find().then((result) => {
-  }).catch((err) => {
-    console.log(err)
-  })
   console.log(user)
   res.render('register', { pageTitle: 'Reddeetznuts : Register' });
 
