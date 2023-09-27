@@ -3,8 +3,13 @@
 <%- include('./partials/head.ejs')%>
   <body>
     <%- include('./partials/header.ejs')%>
-      <form method="post" action="/user/register">
+      <form method="post" action="/user/register" onsubmit="">
         <div class="container">
+          <%if(cookies.isRegistered=="email_used"){%>
+            <div class="alert alert-danger" role="alert">
+                The email has already been used!
+            </div>
+        <%}%>
           <div class="mb-3">
             <label for="InputEmail1" class="form-label">Email address</label>
             <input type="email" name="email" class="form-control" id="emailinput" aria-describedby="emailHelp"
