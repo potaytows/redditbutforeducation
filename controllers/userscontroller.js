@@ -1,4 +1,4 @@
-const Users = require('../models/UsersModel');
+const UserModel = require('../models/UsersModel');
 
 
 function contains(arr, key, val) {
@@ -8,10 +8,10 @@ function contains(arr, key, val) {
     return false;
   }
 const addnewuser = (req, res, next) => {
-    Users.find({}, { 'email': 1, '_id': 0 })
+    UserModel.find({}, { 'email': 1, '_id': 0 })    
         .then((result) => {
             if (!contains(result,"email",req.body.email)) {
-                const newuser = new Users(req.body)
+                const newuser = new UserModel(req.body)
                 newuser.save().then((result) => {
                     res.cookie('isRegistered', 'registered', { maxAge: 5000 })
                     res.redirect('/login')
@@ -35,9 +35,10 @@ const addnewuser = (req, res, next) => {
 }
 
 const validateUser = (req, res, next) => {
-    Users.find({ 'email': req.body.email, 'password': req.body.password }, { 'password': 0 }).then((result) => {
-        if (result.length == 1) {
-            req.session.loginsession = result[0];
+    UserModel.findOne({ 'email': req.body.email, 'password': req.body.password }, { 'password': 0 }).then((result) => {
+        console.log(result)
+        if (result) {
+            req.session.loginsession = result;
             res.cookie('isLoggedin', 'loggedin', { maxAge: 1000 })
             res.redirect('/')
 
