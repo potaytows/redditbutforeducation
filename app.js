@@ -8,6 +8,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/main');
 var userRouter = require('./routes/user');
 var ApiRouter = require('./routes/api');
+var subjectRouter = require('./routes/subject');
 
 
 var app = express();
@@ -34,6 +35,7 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/user',userRouter);
 app.use('/api', ApiRouter);
+app.use('/subject', subjectRouter);
 
 const uri = "mongodb://127.0.0.1:27017/project";
 
