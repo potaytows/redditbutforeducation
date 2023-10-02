@@ -1,3 +1,4 @@
+
 const pwd1 = document.getElementById('pwd1');
 const pwd2 = document.getElementById('pwd2');
 const email = document.getElementById('emailinput')
@@ -70,6 +71,7 @@ function main() {
         buttonchanger();
     }
 }
+
+
+
 main();
-
-

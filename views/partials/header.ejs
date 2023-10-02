@@ -6,17 +6,46 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Home
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-          </ul>
-        </li>
-      </ul>
+
+      <%if(pageInfo.pageType!="Auth"){%>
+        <%if(!sessions.loginsession){%>
+                     
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item">You are not logged in</li>
+            </ul>
+          </li>
+        </ul>
+       
+        <%}else{%>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <%if(subjects.length>0){%> 
+                <%subjects.forEach(function(subject){%>
+                  <li><a class="dropdown-item" href="/subject/<%=subject.id %>"><%=subject.subjectName%></a></li>
+                <%})%>
+              <%}else{%>
+                <li class="dropdown-item">You are not in any class</li>
+                <%}%>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/addsubject">Add Subjects</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+
+        <%}%>
+      <%}%>
+      
       <ul class="nav navbar-nav flex-fill justify-content-center">
         <li class="nav-item">
           <div class="indexsearchbar">
