@@ -8,6 +8,11 @@ body {
   float: none;
 }
 
+/* --------------------Subject.ejs----------------------- */
+.subjectnavactive { 
+  color: #28A745;
+}
+
 /* ---------------------footers----------------------- */
 #footer{
   color: white;

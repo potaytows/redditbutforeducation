@@ -5,18 +5,24 @@
     <%- include('./partials/header.ejs')%>
         <div class="container">
             
-            <%if(cookies.isLoggedin=="loggedin"){%>
+            <%if(cookies.isAdded=="subject"){%>
                 <div class="alert alert-success" role="alert">
-                    Logged in succesfully!!
+                    Added subject in succesfully!!
                 </div>
             <%}%>
-            <%if(cookies.isLoggedout=="true"){%>
-                <div class="alert alert-success" role="alert">
-                    Logged out succesfully!!
+            <form method="POST" action="/subject/add">
+                <div class="form-group">
+                  <label for="subjectName">Enter your subject's Name : </label>*
+                  <input type="text" class="form-control" placeholder="Enter subject's Name" id="subjectName" name="subjectName" required>
                 </div>
-            <%}%>
-            
-                Added Subject!!!
+                <div class="form-group">
+                  <label for="Description">Your subject's description</label>
+                  <input type="text" class="form-control" id="Description" placeholder="Description" name="Description">
+                  <small>You can leave this blank.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
         </div>
     <%- include('./partials/footer.ejs')%>
     </body>

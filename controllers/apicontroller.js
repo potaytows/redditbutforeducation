@@ -1,4 +1,4 @@
-const Users = require('../models/UsersModel');
+const UserModel = require('../models/UserModel');
 
 
 

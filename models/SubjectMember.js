@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 
 const subjectMemberSchema = new mongoose.Schema({
     subject_id:{
-        type:String,
+        type:mongoose.Types.ObjectId, ref: "Subject" 
     },
-    uid:{
+    user_id:{
         type:mongoose.Types.ObjectId, ref: "User" 
     },
+    
     
 
 },{timestamps:true})
