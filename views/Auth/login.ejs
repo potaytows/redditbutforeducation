@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head.ejs')%>
 
-    <body>
-        <%- include('../partials/header.ejs')%>
-            <div class="container">
-                <%if(cookies.isRegistered=="registered"){%>
-                    <div class="alert alert-success" role="alert">
-                        Registered!
-                    </div>
-                    <%}%>
-                        <%if(cookies.isLoggedin=="failedtoLogin"){%>
-                            <div class="alert alert-danger" role="alert">
-                                Your Email or Password is incorrect!!
-                            </div>
-                            <%}%>
-                                <form method="post" action="/user/uservalidator" class="form-signin w-100 m-auto">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                            <input type="email" name="email" class="form-control"
-                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                                            <div id="emailHelp" class="form-text">We'll never share your email with
-                                                anyone else.</div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label"
-                                                required>Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="exampleInputPassword1">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">sign in</button>
-                                        <p class="message my-3">Not registered? <a href="/register">Create an account</a></p>
-                                </form>
-            </div>
-            </div>
-            <%- include('../partials/footer.ejs')%>
-    </body>
+<head>
+    <%- include('../partials/head.ejs')%>
+        <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('../partials/header.ejs')%>
+        <div class="container">
+            <%if(cookies.isRegistered=="registered"){%>
+                <div class="alert alert-success" role="alert">
+                    Registered!
+                </div>
+                <%}%>
+                    <%if(cookies.isLoggedin=="failedtoLogin"){%>
+                        <div class="alert alert-danger" role="alert">
+                            Your Email or Password is incorrect!!
+                        </div>
+                        <%}%>
+                            <%if(cookies.loginNotis=="noAuth"){%>
+                                <div class="alert alert-danger" role="alert">
+                                    Please Log in first!!
+                                </div>
+                                <%}%>
+
+                                    <form method="post" action="/user/uservalidator">
+                                        <div class="container">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                                <input type="email" name="email" class="form-control"
+                                                    id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                                <div id="emailHelp" class="form-text">We'll never share your email with
+                                                    anyone else.</div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label"
+                                                    required>Password</label>
+                                                <input type="password" name="password" class="form-control"
+                                                    id="exampleInputPassword1">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+        </div>
+        </div>
+        <%- include('../partials/footer.ejs')%>
+</body>
 
 </html>

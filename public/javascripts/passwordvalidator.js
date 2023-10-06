@@ -2,20 +2,23 @@
 const pwd1 = document.getElementById('pwd1');
 const pwd2 = document.getElementById('pwd2');
 const email = document.getElementById('emailinput')
-const url = "http://localhost:3000/api/usedemail"
+const url = "http://localhost:3000/api/usedEmail"
 let usedEmail
-const mail = [];
+
 async function getUsedEmail() {
+    const mail = [];
     const response = await fetch(url);
     usedEmail = await response.json();
     usedEmail.forEach(function (item, index) {
         mail.push(item.email)
 
     })
+    return mail;
 
 }
-function main() {
-    getUsedEmail();
+async function main() {
+    const mail = await getUsedEmail();
+    
     pwd1.addEventListener('input', pwdvalidator);
     pwd2.addEventListener('input', pwdvalidator);
     email.addEventListener('input', emailvalidation);

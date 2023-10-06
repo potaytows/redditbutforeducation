@@ -25,13 +25,23 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%if(pageInfo.pageurl!=null){%>
+                <%=subjectInfo.Object.subjectName %>
+              </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/">Home</a></li>
+             <% }else{%>
               Home
+             
             </a>
             <ul class="dropdown-menu">
+              
+              <%} %>
               <%if(subjects.length>0){%> 
                 <%subjects.forEach(function(subject){%>
+                  <%if("/subject/"+subject._id!=pageInfo.pageurl){%> 
                   <li><a class="dropdown-item" href="/subject/<%=subject.id %>"><%=subject.subjectName%></a></li>
-                <%})%>
+                <%}})%>
               <%}else{%>
                 <li class="dropdown-item">You are not in any class</li>
                 <%}%>
