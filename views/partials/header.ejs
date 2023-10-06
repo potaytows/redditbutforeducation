@@ -26,15 +26,16 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <%if(pageInfo.pageurl!=null){%>
-                <%=subject.subjectName %>
+                <%=subjectInfo.Object.subjectName %>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/">Home</a></li>
+              <li><a class="dropdown-item" href="/">Home</a></li>
              <% }else{%>
               Home
              
             </a>
             <ul class="dropdown-menu">
+              
               <%} %>
               <%if(subjects.length>0){%> 
                 <%subjects.forEach(function(subject){%>

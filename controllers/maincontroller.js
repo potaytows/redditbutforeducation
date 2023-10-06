@@ -9,7 +9,6 @@ async function getSubjects(req) {
     list.push(subject.subject_id)
   })
   const subjectList = await SubjectModel.find({_id:{$in:list}},{subjectName:1})
-  console.log(subjectList)
   return subjectList
 
 }
