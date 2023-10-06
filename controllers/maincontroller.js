@@ -1,5 +1,5 @@
 const SubjectModel = require('../models/SubjectModel');
-const subjectMemberModel = require('../models/SubjectMember')
+const subjectMemberModel = require('../models/SubjectMemberModel')
 
 async function getSubjects(req) {
   const uid = req.session.loginsession
