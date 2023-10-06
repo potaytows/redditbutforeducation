@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head.ejs')%>
-    <body>
+
+<head>
+    <%- include('../partials/head.ejs')%>
+        <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
     <%- include('./partials/header.ejs')%>
         <div class="container">
-            
+
             <%if(cookies.isLoggedin=="loggedin"){%>
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
                 </div>
-            <%}%>
-            <%if(cookies.isLoggedout=="true"){%>
-                <div class="alert alert-success" role="alert">
-                    Logged out succesfully!!
-                </div>
-            <%}%>
-            <%if(cookies.addingSubject=="Added"){%>
-                <div class="alert alert-success" role="alert">
-                    Added Subject succesfully!
-                </div>
-            <%}%>
-            
-            
-                
+                <%}%>
+                    <%if(cookies.isLoggedout=="true"){%>
+                        <div class="alert alert-success" role="alert">
+                            Logged out succesfully!!
+                        </div>
+                        <%}%>
+                            <%if(cookies.addingSubject=="Added"){%>
+                                <div class="alert alert-success" role="alert">
+                                    Added Subject succesfully!
+                                </div>
+                                <%}%>
+
+
+
         </div>
-    <%- include('./partials/footer.ejs')%>
-    </body>
+        <%- include('./partials/footer.ejs')%>
+</body>
+
 </html>
