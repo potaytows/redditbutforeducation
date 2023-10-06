@@ -1,11 +1,26 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 /* --------------------header----------------------- */
 
 .indexsearchbar{
   justify-content: center;
   float: none;
+}
+
+/* --------------------Subject.ejs----------------------- */
+.subjectnavactive { 
+  color: #28A745;
+}
+.joinedButton{
+  color: White;
+  background-color:rgb(236, 101, 48)
+
+}
+.joinedButton:hover{
+  color: White;
+  background-color:red;
+  content:'Leave';
 }
 
 /* ---------------------footers----------------------- */

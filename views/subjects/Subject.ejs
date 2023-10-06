@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    <%- include('./partials/header.ejs')%>
+
+    <%- include('../partials/header.ejs')%>
         <div class="container">
 
             <%if(cookies.isLoggedin=="loggedin"){%>
@@ -20,16 +21,11 @@
                             Logged out succesfully!!
                         </div>
                         <%}%>
-                            <%if(cookies.addingSubject=="Added"){%>
-                                <div class="alert alert-success" role="alert">
-                                    Added Subject succesfully!
-                                </div>
-                                <%}%>
-
+                            <%- include('./SubjectHeader.ejs')%>
 
 
         </div>
-        <%- include('./partials/footer.ejs')%>
+        <%- include('../partials/footer.ejs')%>
 </body>
 
 </html>
