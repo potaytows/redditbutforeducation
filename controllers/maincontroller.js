@@ -67,6 +67,4 @@ module.exports = {
   page_profile,
   logout,
   addSubjectPage,
-
-
 }
