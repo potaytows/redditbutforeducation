@@ -5,10 +5,10 @@ const UserModel = require('../models/UserModel');
 
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
-  console.log(subjects)
   res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects }});
 
 };
+
 const page_login = (req, res,) => {
   if (!req.session.loginsession) {
     res.render('Auth/login', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Auth" } });
@@ -18,6 +18,7 @@ const page_login = (req, res,) => {
   }
 
 };
+
 
 const page_register = (req, res,) => {
   if (!req.session.loginsession) {
