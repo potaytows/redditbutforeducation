@@ -1,7 +1,5 @@
 const UserModel = require('../models/UserModel');
 
-
-
 const usedEmail = (req, res,) => {
   UserModel.find({},{'email':1,'_id':0})
   .then((result)=>{
