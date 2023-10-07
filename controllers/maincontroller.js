@@ -1,7 +1,7 @@
-
 const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
+const PostModel = require('../models/PostModel');
 
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
@@ -49,10 +49,22 @@ const logout = (req, res) => {
 const addSubjectPage = async(req, res) => {
     const subjects = await getSubjects(req);
     res.render('AddSubject', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }})
-  
-
 }
 
+const newPostPage = async(req, res) => {
+  const subjects = await getSubjects(req);
+  res.render('AddPost', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }})
+}
+
+const AddPost = async (req, res) => {
+  PostModel.create({
+      post_name: req.body.postname,
+      post_script: req.session.postdescription,
+      user_id: req.session.loginsession._id,
+      subject_id: req.body.subjectid
+  })
+  res.redirect('/subject/')
+};
 
 module.exports = {
   page_index,
@@ -62,4 +74,6 @@ module.exports = {
   page_editprofile,
   logout,
   addSubjectPage,
+  newPostPage,
+  AddPost
 }
