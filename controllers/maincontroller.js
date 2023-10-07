@@ -1,5 +1,6 @@
 const SubjectModel = require('../models/SubjectModel');
-const subjectMemberModel = require('../models/SubjectMember')
+const subjectMemberModel = require('../models/SubjectMember');
+const UserModel = require('../models/UserModel');
 
 async function getSubjects(req) {
   const uid = req.session.loginsession
@@ -40,11 +41,13 @@ const page_register = (req, res,) => {
 
 const page_profile = async(req, res,) => {
   const subjects = await getSubjects(req);
-  res.render('Profile/viewProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects});
+  const user = await UserModel.findOne({_id:req.session.loginsession._id})
+  res.render('Profile/viewProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects,user:user});
 };
 const page_editprofile = async(req, res,) => {
   const subjects = await getSubjects(req);
-  res.render('Profile/editProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects});
+  const user = await UserModel.findOne({_id:req.session.loginsession._id})
+  res.render('Profile/editProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects,user:user});
 };
 
 const logout = (req, res) => {
