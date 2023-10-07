@@ -32,12 +32,12 @@ const page_register = (req, res,) => {
 const page_profile = async(req, res,) => {
   const subjects = await getSubjects(req);
   const user = await UserModel.findOne({_id:req.session.loginsession._id})
-  res.render('Profile/viewProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects,user:user});
+  res.render('Profile/viewProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index",subjects:subjects},user:user});
 };
 const page_editprofile = async(req, res,) => {
   const subjects = await getSubjects(req);
   const user = await UserModel.findOne({_id:req.session.loginsession._id})
-  res.render('Profile/editProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects,user:user});
+  res.render('Profile/editProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index",subjects:subjects},user:user});
 };
 
 const logout = (req, res) => {
