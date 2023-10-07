@@ -1,5 +1,5 @@
-const UserModel = require('../models/UsersModel');
-
+const UserModel = require('../models/UserModel');
+const getSubject = require('../middleware/getSubjects')
 
 function contains(arr, key, val) {
     for (var i = 0; i < arr.length; i++) {
@@ -36,7 +36,6 @@ const addnewuser = (req, res, next) => {
 
 const validateUser = (req, res, next) => {
     UserModel.findOne({ 'email': req.body.email, 'password': req.body.password }, { 'password': 0 }).then((result) => {
-        console.log(result)
         if (result) {
             req.session.loginsession = result;
             res.cookie('isLoggedin', 'loggedin', { maxAge: 1000 })
