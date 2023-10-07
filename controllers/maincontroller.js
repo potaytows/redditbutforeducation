@@ -42,6 +42,10 @@ const page_profile = async(req, res,) => {
   const subjects = await getSubjects(req);
   res.render('Profile/viewProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects});
 };
+const page_editprofile = async(req, res,) => {
+  const subjects = await getSubjects(req);
+  res.render('Profile/editProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects});
+};
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -65,6 +69,7 @@ module.exports = {
   page_login,
   page_register,
   page_profile,
+  page_editprofile,
   logout,
   addSubjectPage,
 }
