@@ -17,8 +17,6 @@ const page_index = async(req, res,) => {
   // console.log(subjects)
   res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" }, subjects: subjects });
 
-  
-
 };
 const page_login = (req, res,) => {
   if (!req.session.loginsession) {
@@ -32,13 +30,19 @@ const page_login = (req, res,) => {
 
 const page_register = (req, res,) => {
   if (!req.session.loginsession) {
-    res.render('Auth/register', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Auth" } });
+    res.render('Auth/register', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Auth" } } );
 
   } else {
     res.redirect('/')
   }
 
 };
+
+const page_profile = async(req, res,) => {
+  const subjects = await getSubjects(req);
+  res.render('Profile/viewProfile', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" },subjects:subjects});
+};
+
 const logout = (req, res) => {
   req.session.destroy();
   res.cookie('isLoggedout', 'true', { maxAge: 1000 })
@@ -60,7 +64,9 @@ module.exports = {
   page_index,
   page_login,
   page_register,
+  page_profile,
   logout,
-  addSubjectPage
+  addSubjectPage,
+
 
 }
