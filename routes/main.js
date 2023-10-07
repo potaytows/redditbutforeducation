@@ -12,5 +12,5 @@ router.get('/AddSubject',MainController.addSubjectPage)
 router.get('/ViewProfile',authChecker,MainController.page_profile)
 router.get('/EditProfile',authChecker,MainController.page_editprofile)
 router.get('/NewPost/:id',authChecker,MainController.newPostPage)
-router.post('/AddPost',MainController.AddPost)
+router.post('/AddPost/:id',MainController.AddPost)
 module.exports = router;

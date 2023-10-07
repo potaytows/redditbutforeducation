@@ -2,6 +2,7 @@ const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
 const PostModel = require('../models/PostModel');
+const SubjectModel = require('../models/SubjectModel');
 
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
@@ -53,17 +54,21 @@ const addSubjectPage = async(req, res) => {
 
 const newPostPage = async(req, res) => {
   const subjects = await getSubjects(req);
-  res.render('AddPost', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }})
+  const sid = req.params.id
+  const subject = await SubjectModel.findOne({_id:sid})
+  res.render('AddPost', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, subject: subject})
 }
 
 const AddPost = async (req, res) => {
-  PostModel.create({
+  const sid = req.params.id
+  console.log(sid)
+  await PostModel.create({
+      subject_id: sid,
       post_name: req.body.postname,
-      post_script: req.session.postdescription,
+      post_text: req.body.posttext,
       user_id: req.session.loginsession._id,
-      subject_id: req.body.subjectid
   })
-  res.redirect('/subject/')
+  res.redirect('/')
 };
 
 module.exports = {
