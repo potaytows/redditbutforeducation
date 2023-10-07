@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <%- include('./partials/head.ejs')%>
+    <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <%- include('./partials/header.ejs')%>
+    <%- include('../partials/header.ejs')%>
         <div class="container">
 
             <%if(cookies.isLoggedin=="loggedin"){%>
@@ -20,16 +20,22 @@
                             Logged out succesfully!!
                         </div>
                         <%}%>
-                            <%if(cookies.addingSubject=="Added"){%>
-                                <div class="alert alert-success" role="alert">
-                                    Added Subject succesfully!
-                                </div>
-                                <%}%>
+                            <%- include('./SubjectHeader.ejs')%>
+                            <h2>Joining requests</h2>
+                           <%=subjectInfo.membersList.requests%>
 
+
+                            <h2>Mods</h2>
+                            <%subjectInfo.membersList.mods.forEach(function(member){%>
+                                <%=member.user_id.email %> Role: <%=member.role%>
+
+                            <%}) %>
+
+                                
 
 
         </div>
-        <%- include('./partials/footer.ejs')%>
+        <%- include('../partials/footer.ejs')%>
 </body>
 
 </html>

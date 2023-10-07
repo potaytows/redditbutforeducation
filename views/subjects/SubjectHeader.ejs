@@ -1,0 +1,41 @@
+<%=subjectInfo.Object.subjectName%>
+<%=subjectInfo.role%>
+<%if(subjectInfo.role=="member"){%>
+    <a type="button" href="/subject/leaving/<%=subjectInfo.Object.id %>" onMouseover="HoveringJoinButt(this)" onMouseout="LeavingTheButt(this)" class="joinedButton btn">Joined</a>
+<%}if(subjectInfo.role=="pending"){%>
+  <a type="button" href="/subject/deleterequest/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Waiting for approval</a>
+<%}if(subjectInfo.role=="creator"){%>
+  <a type="button" href="" class="btn btn-outline-success disabled" disabled>You are creator of this subject</a>
+<%}else{%>
+    <a type="button" href="/subject/requesting/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Request to join</a>%>
+<%}%>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id){%>subjectnavactive<%}%> nav-link" aria-current="page" href="/subject/<%=subjectInfo.Object._id %>">Posts</a>
+          </li>
+          <li class="nav-item">
+            <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id+"/members"){%>subjectnavactive<%}%> nav-link" href="/subject/<%=subjectInfo.Object._id%>/members">Members</a>
+          </li>
+          <li class="nav-item">
+            <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id+"/management"){%>subjectnavactive<%}%> nav-link" href="/subject/<%=subjectInfo.Object._id%>/management">Subject Management</a>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<script>
+function HoveringJoinButt(prop){
+    prop.textContent = "Leave"
+
+}
+function LeavingTheButt(prop){
+    prop.textContent = "Joined"
+}
+</script>

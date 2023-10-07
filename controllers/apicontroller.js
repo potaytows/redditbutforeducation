@@ -1,10 +1,9 @@
-const Users = require('../models/UsersModel');
-
-
+const UserModel = require('../models/UserModel');
 
 const usedEmail = (req, res,) => {
-  Users.find({},{'email':1,'_id':0})
+  UserModel.find({},{'email':1,'_id':0})
   .then((result)=>{
+    console.log(result)
     res.send(result);
     
 }).catch((err)=>{
