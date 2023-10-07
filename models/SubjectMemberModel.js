@@ -8,6 +8,9 @@ const subjectMemberSchema = new mongoose.Schema({
     user_id:{
         type:mongoose.Types.ObjectId, ref: "User" 
     },
+    role:{type:String,
+    require:true
+    }
     
     
 

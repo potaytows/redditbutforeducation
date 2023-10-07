@@ -20,14 +20,18 @@
                             Logged out succesfully!!
                         </div>
                         <%}%>
-
                             <%- include('./SubjectHeader.ejs')%>
-                                <%subjectInfo.membersList.forEach(function(member){%>
-                                    <%=member.email %>
+                            <h2>Joining requests</h2>
+                           <%=subjectInfo.membersList.requests%>
 
 
+                            <h2>Mods</h2>
+                            <%subjectInfo.membersList.mods.forEach(function(member){%>
+                                <%=member.user_id.email %> Role: <%=member.role%>
 
-                                        <%}) %>
+                            <%}) %>
+
+                                
 
 
         </div>

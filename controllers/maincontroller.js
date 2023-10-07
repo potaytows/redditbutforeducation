@@ -1,21 +1,12 @@
 const SubjectModel = require('../models/SubjectModel');
 const subjectMemberModel = require('../models/SubjectMemberModel')
+const {getSubjects} = require('../middleware/getSubjects');
+const { authChecker } = require('../middleware/AuthChecker');
 
-async function getSubjects(req) {
-  const uid = req.session.loginsession
-  var list = []
-  const subjects = await subjectMemberModel.find({ user_id: uid },{user_id:0,_id:0})
-  subjects.forEach((subject)=>{
-    list.push(subject.subject_id)
-  })
-  const subjectList = await SubjectModel.find({_id:{$in:list}},{subjectName:1})
-  return subjectList
-
-}
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
-  // console.log(subjects)
-  res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index" }, subjects: subjects });
+  console.log(subjects)
+  res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects }});
 
   
 
@@ -46,12 +37,9 @@ const logout = (req, res) => {
 };
 
 const addSubjectPage = async(req, res) => {
-  if (req.session.loginsession) {
     const subjects = await getSubjects(req);
-    res.render('AddSubject', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index" }, subjects: subjects })
-  } else {
-    res.redirect('/login')
-  }
+    res.render('AddSubject', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }})
+  
 
 }
 

@@ -15,13 +15,30 @@
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
                 </div>
-                <%}%>
-                    <%if(cookies.isLoggedout=="true"){%>
-                        <div class="alert alert-success" role="alert">
-                            Logged out succesfully!!
-                        </div>
-                        <%}%>
-                            <%- include('./SubjectHeader.ejs')%>
+            <%}%>
+            <%if(cookies.isLoggedout=="true"){%>
+                <div class="alert alert-success" role="alert">
+                    Logged out succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.addRequest=="Added"){%>
+                <div class="alert alert-success" role="alert">
+                    Requested joining
+                </div>
+            <%}%>
+            <%if(cookies.addRequest=="Deleted"){%>
+                <div class="alert alert-success" role="alert">
+                    Deleted request
+                </div>
+            <%}%>
+            
+            <div class="containers">
+                <div class="profile-header">
+                    <img id="profile-picture" src="https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec" alt="รูปโปรไฟล์">
+                </div>
+                <%- include('./SubjectHeader.ejs')%> 
+            </div>
+        
 
 
         </div>

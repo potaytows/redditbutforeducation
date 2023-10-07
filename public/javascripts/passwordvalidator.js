@@ -1,7 +1,7 @@
 const pwd1 = document.getElementById('pwd1');
 const pwd2 = document.getElementById('pwd2');
 const email = document.getElementById('emailinput')
-const url = "http://localhost:4000/api/usedEmail"
+const url = "http://localhost:3000/api/usedEmail"
 let usedEmail
 
 async function getUsedEmail() {
