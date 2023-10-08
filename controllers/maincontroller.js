@@ -91,6 +91,11 @@ const NewComment = async (req, res) => {
   })
   res.redirect('/post/'+postid)
 }
+const aboutus = async(req, res) => {
+  const subjects = await getSubjects(req);
+  res.render('Auth/aboutus', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects:subjects}});
+
+};
 
 
 
@@ -105,5 +110,6 @@ module.exports = {
   newPostPage,
   ViewPost,
   AddPost,
-  NewComment
+  NewComment,
+  aboutus
 }
