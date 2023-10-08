@@ -21,13 +21,27 @@
                         </div>
                         <%}%>
                             <%- include('./SubjectHeader.ejs')%>
+                            <%if(subjectInfo.role=="creator"||subjectInfo.role=="admin") {%>
                             <h2>Joining requests</h2>
-                           <%=subjectInfo.membersList.requests%>
+                            <%subjectInfo.membersList.requests.forEach(function(request){%>
+                                <%=request.user_id.email %><%=request.id%><a type="button" class="btn btn-success"  href="/subject/req/approve/<%=request.id%>">Approve request</a>
+                                <a type="button" class="btn btn-danger"  href="/subject/deleterequest/<%=request.id%>">Delete request</a>
+                            <%}) %>
+
+                            <%}%>
 
 
                             <h2>Mods</h2>
                             <%subjectInfo.membersList.mods.forEach(function(member){%>
-                                <%=member.user_id.email %> Role: <%=member.role%>
+                                <%=member.user_id.email %> <br>
+                                Role: <%=member.role%>
+
+                            <%}) %>
+
+                            <h2>Members</h2>
+                            <%subjectInfo.membersList.members.forEach(function(member){%>
+                                <%=member.user_id.email %> <br>
+                                Role: <%=member.role%><br>
 
                             <%}) %>
 

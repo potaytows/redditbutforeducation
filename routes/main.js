@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 const MainController = require('../controllers/maincontroller')
 const { authChecker } = require('../middleware/AuthChecker');
+const { searchSubjects } = require('../controllers/searchcontroller');
 
+router.get('/search', searchSubjects)
 router.get('/',MainController.page_index)
 router.get('/login',MainController.page_login)
 router.get('/register',MainController.page_register)
