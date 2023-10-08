@@ -1,15 +1,22 @@
-<h1><%=subjectInfo.Object.subjectName%></h1>
+<div class="row my-1">
+<div class="col-sm-6">
+<h3><%=subjectInfo.Object.subjectName%></h3>
+</div>
+<div class="col-sm-6">
+Status :
 <%if(subjectInfo.role=="member"){%>
     <a type="button" href="/subject/leaving/<%=subjectInfo.Object.id %>" onMouseover="HoveringJoinButt(this)" onMouseout="LeavingTheButt(this)" class="joinedButton btn">Joined</a>
 <%}if(subjectInfo.role=="pending"){%>
   <a type="button" href="/subject/deleterequest/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Waiting for approval</a>
 <%}if(subjectInfo.role=="creator"||subjectInfo.role=="admin"){%>
-  <a type="button" href="" class="btn btn-outline-success disabled" disabled>You are creator/admin of this subject</a>
+  <a type="button" href="" class="btn btn-outline-success disabled " disabled>You are creator/admin of this subject</a>
 <%}if(subjectInfo.role=="notMember"){%>
     <a type="button" href="/subject/requesting/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Request to join</a>%>
 <%}%>
-<div class="profile-header">
-  <img id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
+</div>
+</div>
+<div class="profile-header my-3">
+  <img  id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
 </div>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
@@ -29,7 +36,7 @@
               <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id+"/management"){%>subjectnavactive<%}%> nav-link" href="/subject/<%=subjectInfo.Object._id%>/management">Subject Management</a>
             </li> 
           <%}%>
-        
+
         </ul>
       </div>
     </div>
