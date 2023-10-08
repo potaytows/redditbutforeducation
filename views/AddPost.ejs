@@ -9,27 +9,21 @@
 <body>
   <%- include('./partials/header.ejs')%>
     <div class="container">
-
-      <%if(cookies.isAdded=="subject"){%>
-        <div class="alert alert-success" role="alert">
-          Added subject in succesfully!!
-        </div>
-        <%}%>
-
-          <form method="POST" action="/AddPost/<%=subject._id %>">
-            <h3>Adding post for <%=subject.subjectName %>.</h3>
-            <div class="form-group">
-              <label for="PostName">Title : </label>*
-              <input type="text" class="form-control" id="PostName" name="post_title" required>
-            </div>
-            <div class="form-group">
-              <label for="Text">Text</label>
-              <input type="text" class="form-control" id="Text" name="content">
-              <small>You can leave this blank.</small>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-
+      <div class="containers">
+        <form method="POST" action="/AddPost/<%=subject._id %>">
+          <h1 style="font-weight: 600;">Adding new post for <%=subject.subjectName %>.</h1>
+          <div class="form-group mb-3">
+            <label for="PostName" class="form-label">Title : ***</label>
+            <input type="text" class="form-control" placeholder="Your post title." id="PostName" name="post_title" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="Text" class="form-label">Text : </label>
+            <textarea class="form-control" id="Text" placeholder="Text." name="content" rows="3"></textarea>
+            <small>You can leave this blank.</small>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
     <%- include('./partials/footer.ejs')%>
 </body>

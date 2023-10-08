@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs')%>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('./partials/header.ejs')%>
+    <div class="container">
+      <div class="containers">
+        <h1 style="font-weight: bolder;"><%=post.post_title %></h1>
+        <p><%=post.content %></p>
+        <br>
+        <form method="POST" action="/comment/<%=post._id %>">
+          <div class="form-group mb-3">
+            <label for="Text" class="form-label">Comment : </label>
+            <textarea class="form-control" rows="3" placeholder="Comment." id="Text" name="comment" required></textarea>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Post</button>
+          </div>
+        </form>
+      </div>
+      <%- include('Post/CommentList.ejs')%>
+    </div>
+    <%- include('./partials/footer.ejs')%>
+</body>
+
+</html>

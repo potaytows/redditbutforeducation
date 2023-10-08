@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
     post_title:{
-        type:String, ref: "Post Name"
+        type:String
     },
     content:{
-        type:String, ref: "text aaaaaaaaaaaa"
+        type:String, 
     },
     subject_id:{
         type:mongoose.Types.ObjectId, ref: "Subject"

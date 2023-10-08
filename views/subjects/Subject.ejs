@@ -5,9 +5,6 @@
     <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
         <style>
-            .container{
-                
-            }
         </style>
 </head>
 
@@ -15,7 +12,6 @@
 
     <%- include('../partials/header.ejs')%>
         <div class="container">
-
             <%if(cookies.isLoggedin=="loggedin"){%>
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
@@ -24,6 +20,11 @@
             <%if(cookies.isLoggedout=="true"){%>
                 <div class="alert alert-success" role="alert">
                     Logged out succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.approvedMember=="approved"){%>
+                <div class="alert alert-success" role="alert">
+                    Aproved member request succesfully!!
                 </div>
             <%}%>
             <%if(cookies.addRequest=="Added"){%>
@@ -36,14 +37,17 @@
                     Deleted request
                 </div>
             <%}%>
-
             <div class="containers">
-                <div class="profile-header">
-                    <img id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
-                </div>
                 <%- include('./SubjectHeader.ejs')%>
-                <a href="<%=/NewPost/+subjectInfo.Object.id %>" class="btn btn-primary">New Post</a>
+                <%if(subjectInfo.role=="notMember"||subjectInfo.role=="pending"){%>
+                    <h2 class="text-center">Posts are not visable for you.
+                    You are not a member of this subject.</h2>
+                <%}else{%>
+                    <%- include('../Post/PostList.ejs')%>
+
+                    <%}%>
             </div>
+
         </div>
         <%- include('../partials/footer.ejs')%>
 </body>
