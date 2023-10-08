@@ -1,11 +1,10 @@
 const SubjectModel = require('../models/SubjectModel');
 const PostModel = require('../models/PostModel');
 const subjectMemberModel = require('../models/SubjectMemberModel');
-const UserModel = require('../models/UserModel');
-const JoinRequestModel = require('../models/JoinRequestModel');
 var fs = require('fs');
 var path = require('path');
 const { getSubjects } = require('../middleware/getSubjects')
+const moment = require('moment')
 
 async function getMemberRole(req, sid) {
   const uid = req.session.loginsession
@@ -17,13 +16,6 @@ async function getMemberRole(req, sid) {
   }
 }
 
-async function getPost(req, res) {
-  const sid = req.params.id
-  console.log("SID IN GETPOST = " + sid)
-  const post = await PostModel.find({subject_id:sid})
-  console.log("POST = " + post)
-  return post
-}
 
 const getSubject = async (req, res) => {
   const subjects = await getSubjects(req);
@@ -32,9 +24,8 @@ const getSubject = async (req, res) => {
   if (subject) {
     const name = subject.subjectName
     const role = await getMemberRole(req, sid);
-    const post = await getPost(req, sid);
-    console.log("Post IN SUBJECTSHOW = " + post)
-    res.render('subjects/Subject', { allposts : post, subjects: subjects, pageInfo: { pageTitle: name, pageType: "Index", pageurl: '/subject/' + req.params.id, subjects: subjects, }, subjectInfo: { Object: subject, role: role } })
+    const posts = await PostModel.find({subject_id:sid}).populate("user_id","-password")
+    res.render('subjects/Subject', { allposts : {posts,moment}, subjects: subjects, pageInfo: { pageTitle: name, pageType: "Index", pageurl: '/subject/' + req.params.id, subjects: subjects, }, subjectInfo: { Object: subject, role: role } })
   } else {
     res.redirect('/')
   }
@@ -154,12 +145,7 @@ const EditSubject = async (req, res) => {
         subjectName: req.body.subjectName, Description: req.body.Description, subjectIcon: {
           data: fs.readFileSync(path.join(__dirname + "/../uploads/" + req.file.filename)),
           contentType: 'image/png'
-          
-        }
-      }
-    }
-    )
-
+        }}})
   }else{
     await SubjectModel.findByIdAndUpdate({ _id: sid }, {
       $set: {

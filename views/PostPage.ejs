@@ -10,10 +10,10 @@
     <%- include('./partials/header.ejs')%>
     <div class="container">
       <div class="containers">
-        <h1 style="font-weight: bolder;"><%= allposts[0].post_title %></h1>
-        <p><%= allposts[0].content %></p>
+        <h1 style="font-weight: bolder;"><%=post.post_title %></h1>
+        <p><%=post.content %></p>
         <br>
-        <form method="POST" action="/comment/<%= allposts[0]._id %>">
+        <form method="POST" action="/comment/<%=post._id %>">
           <div class="form-group mb-3">
             <label for="Text" class="form-label">Comment : </label>
             <textarea class="form-control" rows="3" placeholder="Comment." id="Text" name="comment" required></textarea>
@@ -22,8 +22,6 @@
             <button type="submit" class="btn btn-primary">Post</button>
           </div>
         </form>
-        <small>Subject ID = <%= allposts[0].subject_id %></small>
-        <br><small>All = <%= allposts %></small>
       </div>
       <%- include('Post/CommentList.ejs')%>
     </div>

@@ -10,13 +10,6 @@
     <%- include('../partials/header.ejs')%>
     <form method="POST" action="/subject/edit/<%=subjectInfo.Object.id %>" enctype="multipart/form-data">
         <div class="containers">
-            <div class="profile-header">
-                <img id="profile-picture"
-                    src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>"
-                    alt="รูปโปรไฟล์">
-            </div>
-            <input type="file" id="image" name="image" value="" /><br>
-
             <%- include('./SubjectHeader.ejs')%>
 
                 

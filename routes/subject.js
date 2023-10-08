@@ -5,7 +5,7 @@ const subjectController = require('../controllers/subjectcontroller');
 const { authChecker } = require('../middleware/AuthChecker');
 const {isAdmin} = require('../middleware/isAdmin')
 
-
+//เรียกใช้ multer หรือ ตัวจัดการfile 
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -15,11 +15,10 @@ var storage = multer.diskStorage({
       cb(null,file.fieldname + '-' + Date.now())
   }
 });
-
 var upload = multer({ storage: storage });
 
 
-
+//ประกาศ route
 router.use(authChecker)
 router.get('/add',subjectController.addSubjectPage)
 router.post('/add',upload.single('image'),subjectController.addSubject)

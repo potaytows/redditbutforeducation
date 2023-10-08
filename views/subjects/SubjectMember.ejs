@@ -21,35 +21,53 @@
                         </div>
                         <%}%>
                         <div class="containers">
-                            <div class="profile-header">
-                                <img id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
-                            </div>
                             <%- include('./SubjectHeader.ejs')%>
+                            
+                            <%if(subjectInfo.role=="notMember"||subjectInfo.role=="pending"){%>
+                                <h2 class="text-center">Members are not visable for you.
+                                You are not a member of this subject.</h2>
+                            <%}else{%>
                             <%if(subjectInfo.role=="creator"||subjectInfo.role=="admin") {%>
                                 <h5>Joining requests - <%=subjectInfo.membersList.requests.length%></h5>
                                 <%subjectInfo.membersList.requests.forEach(function(request){%>
-                                    <%=request.user_id.email %><a type="button" class="btn btn-success"  href="/subject/req/approve/<%=request.id%>">Approve request</a>
-                                    <a type="button" class="btn btn-danger"  href="/subject/deleterequest/<%=request.id%>">Delete request</a>
+                                    <%=request.user_id.email %><a type="button" class="btn btn-success"  href="/subject/req/approve/<%=request.id%>">Approve</a>
+                                    <a type="button" class="btn btn-danger"  href="/subject/deleterequest/<%=request.id%>">Decline</a>
                                 <%}) %>
-    
-                                <%}%>
-    
-    
+                                
                                 <h5>Mods - <%=subjectInfo.membersList.mods.length%></h5>
                                 <%subjectInfo.membersList.mods.forEach(function(member){%>
+                                    
                                     <%=member.user_id.email %> <br>
-                                    Role: <%=member.role%>
+                                    Role: <%=member.role%> <a type="button" class="promoteLink"  href="/subject/demote/<%=member.id%>">demote from admin</a><br>
     
                                 <%}) %>
     
                                 <h5>Members - <%=subjectInfo.membersList.members.length%></h5>
                                 <%subjectInfo.membersList.members.forEach(function(member){%>
                                     <%=member.user_id.email %> <br>
-                                    Role: <%=member.role%><br>
+                                    Role: <%=member.role%><%=member.user_id.email %><a type="button" class="promoteLink"  href="/subject/promote/<%=member.id%>">promote to admin</a><br>
+    
+                                <%}) %>
+
+                                <%}else{%>
+                                    <h5>Mods - <%=subjectInfo.membersList.mods.length%></h5>
+                                <%subjectInfo.membersList.mods.forEach(function(member){%>
+                                    
+                                    <%=member.user_id.email %> <br>
+                                    Role: <%=member.role%> <br>
     
                                 <%}) %>
     
-                        </div>
+                                <h5>Members - <%=subjectInfo.membersList.members.length%></h5>
+                                <%subjectInfo.membersList.members.forEach(function(member){%>
+                                    <%=member.user_id.email %> <br>
+                                    Role: <%=member.role%><%=member.user_id.email %><br>
+    
+                                <%}) %>
+                                <%}%>
+                        <%}%>
+                      
+                    </div> 
                             
 
                                 

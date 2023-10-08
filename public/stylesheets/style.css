@@ -113,3 +113,8 @@ header {
   background-position: center;
 
 }
+a.promoteLink{
+  color: rgb(150, 80, 0);
+  text-decoration:none ;
+  font-size: 20px;
+}
