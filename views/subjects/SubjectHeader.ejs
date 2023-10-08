@@ -1,14 +1,16 @@
-<%=subjectInfo.Object.subjectName%>
-<%=subjectInfo.role%>
+<h1><%=subjectInfo.Object.subjectName%></h1>
 <%if(subjectInfo.role=="member"){%>
     <a type="button" href="/subject/leaving/<%=subjectInfo.Object.id %>" onMouseover="HoveringJoinButt(this)" onMouseout="LeavingTheButt(this)" class="joinedButton btn">Joined</a>
 <%}if(subjectInfo.role=="pending"){%>
   <a type="button" href="/subject/deleterequest/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Waiting for approval</a>
-<%}if(subjectInfo.role=="creator"){%>
-  <a type="button" href="" class="btn btn-outline-success disabled" disabled>You are creator of this subject</a>
-<%}else{%>
+<%}if(subjectInfo.role=="creator"||subjectInfo.role=="admin"){%>
+  <a type="button" href="" class="btn btn-outline-success disabled" disabled>You are creator/admin of this subject</a>
+<%}if(subjectInfo.role=="notMember"){%>
     <a type="button" href="/subject/requesting/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Request to join</a>%>
 <%}%>
+<div class="profile-header">
+  <img id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
+</div>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,9 +24,12 @@
           <li class="nav-item">
             <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id+"/members"){%>subjectnavactive<%}%> nav-link" href="/subject/<%=subjectInfo.Object._id%>/members">Members</a>
           </li>
-          <li class="nav-item">
-            <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id+"/management"){%>subjectnavactive<%}%> nav-link" href="/subject/<%=subjectInfo.Object._id%>/management">Subject Management</a>
-          </li> 
+          <%if(subjectInfo.role=="creator"||subjectInfo.role=="admin"){%>
+            <li class="nav-item">
+              <a class="<%if(pageInfo.pageurl=="/subject/"+subjectInfo.Object.id+"/management"){%>subjectnavactive<%}%> nav-link" href="/subject/<%=subjectInfo.Object._id%>/management">Subject Management</a>
+            </li> 
+          <%}%>
+        
         </ul>
       </div>
     </div>

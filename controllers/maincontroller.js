@@ -1,7 +1,10 @@
-
 const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
+const SubjectModel = require('../models/SubjectModel');
+
+const PostModel = require('../models/PostModel');
+const CommentModel = require('../models/CommentModel');
 
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
@@ -50,10 +53,44 @@ const logout = (req, res) => {
 const addSubjectPage = async(req, res) => {
     const subjects = await getSubjects(req);
     res.render('AddSubject', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }})
-  
-
 }
 
+const newPostPage = async(req, res) => {
+  const subjects = await getSubjects(req);
+  const sid = req.params.id
+  const subject = await SubjectModel.findOne({_id:sid})
+  res.render('AddPost', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, subject: subject})
+}
+
+const ViewPost = async (req, res) => {
+  const subjects = await getSubjects(req);
+  const postid = req.params.id
+  const post = await PostModel.findOne({_id: postid})
+  const comments = await CommentModel.find({post_id: postid}).populate("user_id",'-password')
+  res.render('PostPage', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, post: post, allcomments: comments })
+}
+
+const AddPost = async (req, res) => {
+  const sid = req.params.id
+  console.log(sid)
+  await PostModel.create({
+      subject_id: sid,
+      post_title: req.body.post_title,
+      content: req.body.content,
+      user_id: req.session.loginsession._id,
+  })
+  res.redirect('/subject/'+sid)
+};
+
+const NewComment = async (req, res) => {
+  const postid = req.params.id
+  await CommentModel.create({
+      post_id: postid,
+      user_id: req.session.loginsession._id,
+      comment: req.body.comment
+  })
+  res.redirect('/post/'+postid)
+}
 
 module.exports = {
   page_index,
@@ -63,4 +100,8 @@ module.exports = {
   page_editprofile,
   logout,
   addSubjectPage,
+  newPostPage,
+  ViewPost,
+  AddPost,
+  NewComment
 }

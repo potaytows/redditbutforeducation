@@ -22,11 +22,9 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    role:{
-        // 0 = normal User
-        // 1 = admin
-        type:Number,
-        default:0
+    pfp:{
+        data:Buffer,
+        contentType:String
     }
 },{timestamps:true})
 

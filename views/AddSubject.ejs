@@ -9,28 +9,40 @@
 <body>
   <%- include('./partials/header.ejs')%>
     <div class="container">
-
       <%if(cookies.isAdded=="subject"){%>
         <div class="alert alert-success" role="alert">
           Added subject in succesfully!!
         </div>
-        <%}%>
-          <form method="POST" action="/subject/add">
-            <div class="form-group">
-              <label for="subjectName">Enter your subject's Name : </label>*
-              <input type="text" class="form-control" placeholder="Enter subject's Name" id="subjectName"
-                name="subjectName" required>
+      <%}%>
+
+        <div class="containers">
+          <form method="POST" action="/subject/add" enctype="multipart/form-data">
+            <h1 style="font-weight: 600;">Adding new subject.</h1>
+            <div class="form-group mb-3">
+              <label for="subjectName" class="form-label">Enter your subject's Name : ***</label>
+              <input type="text" class="form-control" placeholder="Enter subject's Name" id="subjectName" name="subjectName" required>
             </div>
-            <div class="form-group">
-              <label for="Description">Your subject's description</label>
+            <div class="form-group mb-3">
+              <label for="Description" class="form-label">Your subject's description : </label>
               <input type="text" class="form-control" id="Description" placeholder="Description" name="Description">
               <small>You can leave this blank.</small>
             </div>
+
+            <div class="from-group mb-3">
+            <label for="image">Upload Image</label>
+            <input type="file" class="form-control form-control-lg" id="imageUpload" name="image" value="" accept=".png, .jpg, .jpeg .gif" />
+            Subject Icon Preview
+            <div class="profile-header">
+      
+              <img id="imagePreview" >
+
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-
+        </div>
     </div>
     <%- include('./partials/footer.ejs')%>
+    <script language="JavaScript" type="text/javascript" src="/javascripts/profilePreview.js"></script>
 </body>
 
 </html>

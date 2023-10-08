@@ -1,0 +1,28 @@
+
+
+    <div class="containers p-3">
+        <h2 style="font-weight: bolder;">All Post</h2>
+        <a href="<%=/NewPost/+subjectInfo.Object.id %>" class="btn btn-primary">New Post</a>
+    </div>
+
+<% if(allposts.posts.length>0) { %>
+    <% allposts.posts.forEach(post => { %>
+        <div class="containers p-3">
+            <a href="/post/<%=post._id %>" style="text-decoration: none; color: black;">
+                <h2 style="font-weight: bolder;"><%= post.post_title %></h2>
+                <span style="color: rgb(150, 150, 150); font-weight: 700;font-size: 15px;"><%= post.user_id.email %></span><br>
+                <span style="color: rgb(150, 150, 150); font-weight: 700;font-size: 15px;""> <%=allposts.moment(post.created_at).format('MMM DD') %></span><br>
+                <span><%= post.content %></span>
+                <br><br>
+               
+                
+            </a>
+        </div>
+    <% }) %>
+<% } else { %>
+    <div class="containers p-3">
+        <span>No Post.</span>
+    </div>
+<% } %>
+
+
