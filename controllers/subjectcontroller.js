@@ -60,14 +60,13 @@ const addSubjectPage = async (req, res) => {
 }
 
 const addSubject = async (req, res) => {
-  console.log(req.file)
   await SubjectModel.create({
     subjectName: req.body.subjectName,
     subjectManager: req.session.loginsession,
     Description: req.body.Description,
-    subjectIcon:{
-      data:fs.readFileSync(path.join(__dirname+"/../uploads/"+req.file.filename)),
-      contentType:'image/png'
+    subjectIcon: {
+      data: fs.readFileSync(path.join(__dirname + "/../uploads/" + req.file.filename)),
+      contentType: 'image/png'
     }
 
   }).then((result) => {
@@ -75,10 +74,10 @@ const addSubject = async (req, res) => {
       subject_id: result._id,
       user_id: req.session.loginsession._id,
       role: "creator"
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log(err)
     })
-    
+
     res.cookie('addingSubject', 'Added', { maxAge: 5000 })
     res.redirect('/')
   })
@@ -114,14 +113,14 @@ const approveRequest = async (req, res) => {
 
   })
 }
-const disApprove = async(req,res)=>{
+const disApprove = async (req, res) => {
   const rid = req.params.id
   await subjectMemberModel.findOneAndDelete({
-    id:rid,
+    id: rid,
     role: "pending"
-  }).then(()=>{
+  }).then(() => {
     res.cookie('Disapproved', 'disapproved', { maxAge: 3000 })
-    res.redirect('/subject/'+sid+'/members')
+    res.redirect('/subject/' + sid + '/members')
 
   })
 }
@@ -131,15 +130,44 @@ const leaveSubject = async (req, res) => {
     subject_id: sid,
     user_id: req.session.loginsession._id,
     role: "member"
-  }).then(()=>{
+  }).then(() => {
     res.cookie('Left', 'Left', { maxAge: 3000 })
-    res.redirect('/subject/'+sid)
+    res.redirect('/subject/' + sid)
 
   })
+}
+
+const managementPage = async (req, res) => {
+  const sid = req.params.id
+  const role = await getMemberRole(req, sid);
+  const subjects = await getSubjects(req);
+  const subject = await SubjectModel.findOne({ _id: sid })
+  res.render('subjects/SubjectManagement', { pageInfo: { pageTitle: subject.subjectName, pageType: "Index", pageurl: '/subject/' + req.params.id + '/management', subjects: subjects }, subjectInfo: { Object: subject, role: role } })
 
 
 }
+const EditSubject = async (req, res) => {
+  const sid = req.params.id
+  if(req.file){
+    await SubjectModel.findByIdAndUpdate({ _id: sid }, {
+      $set: {
+        subjectName: req.body.subjectName, Description: req.body.Description, subjectIcon: {
+          data: fs.readFileSync(path.join(__dirname + "/../uploads/" + req.file.filename)),
+          contentType: 'image/png'
+          
+        }
+      }
+    }
+    )
 
+  }else{
+    await SubjectModel.findByIdAndUpdate({ _id: sid }, {
+      $set: {
+        subjectName: req.body.subjectName, Description: req.body.Description }})
+    
+  }
+  res.redirect('/subject/' + sid)
+}
 
 
 module.exports = {
@@ -150,5 +178,10 @@ module.exports = {
   addJoinRequest,
   deleteRequest,
   approveRequest,
-  leaveSubject
+  leaveSubject,
+  leaveSubject,
+  managementPage,
+  EditSubject
+
+
 }

@@ -27,15 +27,23 @@
               <input type="text" class="form-control" id="Description" placeholder="Description" name="Description">
               <small>You can leave this blank.</small>
             </div>
+
             <div class="from-group mb-3">
               <label for="image">Upload Image</label>
               <input type="file" id="image" name="image" value="" />
+
+            <label for="image">Upload Image</label>
+            <input type="file" class="form-control form-control-lg" id="imageUpload" name="image" value="" accept=".png, .jpg, .jpeg .gif" />
+            <div class="profile-header">
+              <img id="imagePreview" src="" alt="">
+
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
     </div>
     <%- include('./partials/footer.ejs')%>
+    <script language="JavaScript" type="text/javascript" src="/javascripts/profilePreview.js"></script>
 </body>
 
 </html>

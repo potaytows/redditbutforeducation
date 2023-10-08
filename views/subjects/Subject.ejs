@@ -5,7 +5,6 @@
     <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
         <style>
-
         </style>
 </head>
 
@@ -34,9 +33,7 @@
                 </div>
             <%}%>
             <div class="containers">
-                <div class="profile-header">
-                    <img id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
-                </div>
+                
                 <%- include('./SubjectHeader.ejs')%>
             </div>
             <%- include('../Post/PostList.ejs')%>

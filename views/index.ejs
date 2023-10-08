@@ -14,17 +14,22 @@
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
                 </div>
-                <%}%>
-                    <%if(cookies.isLoggedout=="true"){%>
-                        <div class="alert alert-success" role="alert">
-                            Logged out succesfully!!
-                        </div>
-                        <%}%>
-                            <%if(cookies.addingSubject=="Added"){%>
-                                <div class="alert alert-success" role="alert">
-                                    Added Subject succesfully!
-                                </div>
-                                <%}%>
+            <%}%>
+            <%if(cookies.isLoggedout=="true"){%>
+                <div class="alert alert-success" role="alert">
+                    Logged out succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.addingSubject=="Added"){%>
+                <div class="alert alert-success" role="alert">
+                    Added Subject succesfully!
+                </div>
+            <%}%>
+            <%if(cookies.notAdmin=="notAdmin"){%>
+                <div class="alert alert-danger" role="alert">
+                    You are not an admin!!
+                </div>
+            <%}%>
 
 
 
