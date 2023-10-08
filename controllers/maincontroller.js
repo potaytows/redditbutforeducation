@@ -97,6 +97,8 @@ const aboutus = async(req, res) => {
 
 };
 
+
+
 module.exports = {
   page_index,
   page_login,

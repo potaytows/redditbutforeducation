@@ -1,12 +1,20 @@
 <% if(allcomments.length>0) { %>
-    <% allcomments.forEach(acomment => { %>
+    <% allcomments.forEach(acomment=> { %>
         <div class="containers p-3">
-            <h5 style="color: rgb(150, 150, 150); font-weight: 700;"><%= acomment.user_id.email %></h5>
-            <span><%= acomment.comment %></span>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 style="color: rgb(150, 150, 150); font-weight: 700;">
+                        <%= acomment.user_id.email %>
+                    </h5>
+                    <p>
+                        <%= acomment.comment %>
+                    </p>
+                </div>
+            </div>
         </div>
-    <% }) %>
-<% } else { %>
-    <div class="containers p-3">
-        <span>No Comment.</span>
-    </div>
-<% } %>    
+        <% }) %>
+            <% } else { %>
+                <div class="containers p-3">
+                    <span>No Comment.</span>
+                </div>
+                <% } %>

@@ -37,8 +37,10 @@
                     Deleted request
                 </div>
             <%}%>
-            <div class="containers">
+            <div class="containers ">
                 <%- include('./SubjectHeader.ejs')%>
+            </div>
+                <div class="containers">
                 <%if(subjectInfo.role=="notMember"||subjectInfo.role=="pending"){%>
                     <h2 class="text-center">Posts are not visable for you.
                     You are not a member of this subject.</h2>
@@ -50,6 +52,7 @@
 
         </div>
         <%- include('../partials/footer_2.ejs')%>
+
 </body>
 
 </html>

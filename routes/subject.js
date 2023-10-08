@@ -30,4 +30,7 @@ router.get('/req/approve/:id',subjectController.approveRequest)
 router.get('/leaving/:id',authChecker,subjectController.leaveSubject)
 router.get('/:id/management',isAdmin,subjectController.managementPage)
 router.post('/edit/:id',isAdmin,upload.single('image'),subjectController.EditSubject)
+router.get('/promote/:uid/:sid',subjectController .PromoteUser)
+router.get('/demote/:uid/:sid',subjectController .DemoteUser)
+router.get('/kick/:uid/:sid',subjectController .KickUser)
 module.exports = router;

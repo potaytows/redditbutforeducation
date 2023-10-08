@@ -28,40 +28,86 @@
                                 You are not a member of this subject.</h2>
                             <%}else{%>
                             <%if(subjectInfo.role=="creator"||subjectInfo.role=="admin") {%>
-                                <h5>Joining requests - <%=subjectInfo.membersList.requests.length%></h5>
+                                <h4>Joining requests - <%=subjectInfo.membersList.requests.length%></h4>
                                 <%subjectInfo.membersList.requests.forEach(function(request){%>
                                     <%=request.user_id.email %><a type="button" class="btn btn-success"  href="/subject/req/approve/<%=request.id%>">Approve</a>
                                     <a type="button" class="btn btn-danger"  href="/subject/deleterequest/<%=request.id%>">Decline</a>
                                 <%}) %>
                                 
-                                <h5>Mods - <%=subjectInfo.membersList.mods.length%></h5>
+                                <h4>Mods - <%=subjectInfo.membersList.mods.length%></h5>
                                 <%subjectInfo.membersList.mods.forEach(function(member){%>
+                                    <%if(subjectInfo.role=="creator"){%>
+                                        <%if(sessions.loginsession.email==member.user_id.email){%>
+                                            <%=member.user_id.email %> (you) <br>
+                                            Role: <%=member.role%> <br>
+                                            <hr>
+    
+    
+                                        <% }else{%>
+                                            <%=member.user_id.email %> <br>
+                                            Role: <%=member.role%> <a type="button" class="promoteLink"  href="/subject/demote/<%=member.user_id.id%>/<%=subjectInfo.Object.id %>">demote from admin</a><br>
+                                            <hr>
+                                        <% }%>
+                                    <%}else{%>
+                                        <%=member.user_id.email %><%if(sessions.loginsession.email==member.user_id.email){%>(you)<%}%><br>
+                                            Role: <%=member.role%> <br>
+                                            <hr>
+
+
+                                    <%}%>
                                     
-                                    <%=member.user_id.email %> <br>
-                                    Role: <%=member.role%> <a type="button" class="promoteLink"  href="/subject/demote/<%=member.id%>">demote from admin</a><br>
+                                    
+                                    
     
                                 <%}) %>
     
-                                <h5>Members - <%=subjectInfo.membersList.members.length%></h5>
+                                <h4>Members - <%=subjectInfo.membersList.members.length%></h4>
+                                <%var count = 0 %>
                                 <%subjectInfo.membersList.members.forEach(function(member){%>
                                     <%=member.user_id.email %> <br>
-                                    Role: <%=member.role%><%=member.user_id.email %><a type="button" class="promoteLink"  href="/subject/promote/<%=member.id%>">promote to admin</a><br>
-    
+                                    Role: <%=member.role%> <br>
+                                    <%if(subjectInfo.role=="creator"){%><a type="button" class="promoteLink"  href="/subject/promote/<%=member.user_id.id%>/<%=subjectInfo.Object.id %>"> promote to admin</a><br><%}%>
+                                    <a type="button" class="promoteLink" data-bs-toggle="modal" data-bs-target="#modal<%=count %>">
+                                        Kick from subject
+                                    </a>
+                                      
+                                    <div class="modal fade" id="modal<%=count %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Kick <%=member.user_id.email %></h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              <a type="button" class=" btn btn-primary"  href="/subject/kick/<%=member.user_id.id%>/<%=subjectInfo.Object.id %>">kick from subject</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    
+                                    <hr>
+                                    <%count+=1 %>
                                 <%}) %>
 
                                 <%}else{%>
-                                    <h5>Mods - <%=subjectInfo.membersList.mods.length%></h5>
+                                    <h4>Mods - <%=subjectInfo.membersList.mods.length%></h4>
                                 <%subjectInfo.membersList.mods.forEach(function(member){%>
                                     
                                     <%=member.user_id.email %> <br>
                                     Role: <%=member.role%> <br>
+                                    <hr>
     
                                 <%}) %>
     
-                                <h5>Members - <%=subjectInfo.membersList.members.length%></h5>
+                                <h4>Members - <%=subjectInfo.membersList.members.length%></h4>
                                 <%subjectInfo.membersList.members.forEach(function(member){%>
                                     <%=member.user_id.email %> <br>
                                     Role: <%=member.role%><%=member.user_id.email %><br>
+                                    <hr>
     
                                 <%}) %>
                                 <%}%>

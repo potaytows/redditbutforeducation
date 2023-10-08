@@ -4,7 +4,8 @@ const subjectMemberModel = require('../models/SubjectMemberModel');
 var fs = require('fs');
 var path = require('path');
 const { getSubjects } = require('../middleware/getSubjects')
-const moment = require('moment')
+const moment = require('moment');
+const UserModel = require('../models/UserModel');
 
 async function getMemberRole(req, sid) {
   const uid = req.session.loginsession
@@ -154,7 +155,27 @@ const EditSubject = async (req, res) => {
   }
   res.redirect('/subject/' + sid)
 }
-
+const PromoteUser = async (req,res)=>{
+  const uid = req.params.uid
+  const sid = req.params.sid
+  const result = await subjectMemberModel.findOneAndUpdate({user_id:uid,subject_id:sid},{$set:{role:'admin'}})
+  console.log(result)
+  res.redirect('/subject/'+sid+'/members') 
+}
+const DemoteUser = async (req,res)=>{
+  const uid = req.params.uid
+  const sid = req.params.sid
+  const result = await subjectMemberModel.findOneAndUpdate({user_id:uid,subject_id:sid},{$set:{role:'member'}})
+  console.log(result)
+  res.redirect('/subject/'+sid+'/members') 
+}
+const KickUser = async (req,res)=>{
+  const uid = req.params.uid
+  const sid = req.params.sid
+  const result = await subjectMemberModel.findOneAndDelete({user_id:uid,subject_id:sid})
+  console.log(result)
+  res.redirect('/subject/'+sid+'/members') 
+}
 
 module.exports = {
   addSubjectPage,
@@ -167,7 +188,10 @@ module.exports = {
   leaveSubject,
   leaveSubject,
   managementPage,
-  EditSubject
+  EditSubject,
+  PromoteUser,
+  DemoteUser,
+  KickUser
 
 
 }
