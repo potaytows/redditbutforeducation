@@ -1,14 +1,15 @@
-
 const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
+const PostModel = require('../models/PostModel');
+const SubjectModel = require('../models/SubjectModel');
 
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
-  console.log(subjects)
   res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects }});
 
 };
+
 const page_login = (req, res,) => {
   if (!req.session.loginsession) {
     res.render('Auth/login', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Auth" } });
@@ -18,6 +19,7 @@ const page_login = (req, res,) => {
   }
 
 };
+
 
 const page_register = (req, res,) => {
   if (!req.session.loginsession) {
@@ -49,10 +51,26 @@ const logout = (req, res) => {
 const addSubjectPage = async(req, res) => {
     const subjects = await getSubjects(req);
     res.render('AddSubject', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }})
-  
-
 }
 
+const newPostPage = async(req, res) => {
+  const subjects = await getSubjects(req);
+  const sid = req.params.id
+  const subject = await SubjectModel.findOne({_id:sid})
+  res.render('AddPost', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, subject: subject})
+}
+
+const AddPost = async (req, res) => {
+  const sid = req.params.id
+  console.log(sid)
+  await PostModel.create({
+      subject_id: sid,
+      post_name: req.body.postname,
+      post_text: req.body.posttext,
+      user_id: req.session.loginsession._id,
+  })
+  res.redirect('/')
+};
 
 module.exports = {
   page_index,
@@ -62,4 +80,6 @@ module.exports = {
   page_editprofile,
   logout,
   addSubjectPage,
+  newPostPage,
+  AddPost
 }

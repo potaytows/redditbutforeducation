@@ -15,19 +15,18 @@
           Added subject in succesfully!!
         </div>
         <%}%>
-          <form method="POST" action="/subject/add" enctype="multipart/form-data">
+
+          <form method="POST" action="/AddPost/<%=subject._id %>">
+            <h3>Adding post for <%=subject.subjectName %>.</h3>
             <div class="form-group">
-              <label for="subjectName">Enter your subject's Name : </label>*
-              <input type="text" class="form-control" placeholder="Enter subject's Name" id="subjectName"
-                name="subjectName" required>
+              <label for="PostName">Title : </label>*
+              <input type="text" class="form-control" id="PostName" name="post_title" required>
             </div>
             <div class="form-group">
-              <label for="Description">Your subject's description</label>
-              <input type="text" class="form-control" id="Description" placeholder="Description" name="Description">
+              <label for="Text">Text</label>
+              <input type="text" class="form-control" id="Text" name="content">
               <small>You can leave this blank.</small>
             </div>
-            <label for="image">Upload Image</label>
-            <input type="file" id="image" name="image" value="" />
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
 

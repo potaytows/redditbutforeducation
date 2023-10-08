@@ -10,10 +10,6 @@
   <%- include('./partials/header.ejs')%>
     <div class="container">
 
-      <%if(cookies.isAdded=="subject"){%>
-        <div class="alert alert-success" role="alert">
-          Added subject in succesfully!!
-        </div>
         <%}%>
           <form method="POST" action="/subject/add" enctype="multipart/form-data">
             <div class="form-group">
@@ -26,8 +22,6 @@
               <input type="text" class="form-control" id="Description" placeholder="Description" name="Description">
               <small>You can leave this blank.</small>
             </div>
-            <label for="image">Upload Image</label>
-            <input type="file" id="image" name="image" value="" />
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
 
