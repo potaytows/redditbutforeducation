@@ -36,9 +36,17 @@
                                 
                                 <h5>Mods - <%=subjectInfo.membersList.mods.length%></h5>
                                 <%subjectInfo.membersList.mods.forEach(function(member){%>
+                                    <%if(sessions.loginsession.id==member.id){%>
+                                        <%=member.user_id.email %>(you) <br>
+                                        Role: <%=member.role%> <br>
+
+
+                                    <% }else{%>
+                                        <%=member.user_id.email %> <br>
+                                        Role: <%=member.role%> <a type="button" class="promoteLink"  href="/subject/demote/<%=member.id%>">demote from admin</a><br>
+
+                                    <% }%>
                                     
-                                    <%=member.user_id.email %> <br>
-                                    Role: <%=member.role%> <a type="button" class="promoteLink"  href="/subject/demote/<%=member.id%>">demote from admin</a><br>
     
                                 <%}) %>
     
