@@ -5,9 +5,7 @@
     <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
         <style>
-            .container{
-                
-            }
+
         </style>
 </head>
 
@@ -15,7 +13,6 @@
 
     <%- include('../partials/header.ejs')%>
         <div class="container">
-
             <%if(cookies.isLoggedin=="loggedin"){%>
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
@@ -36,14 +33,13 @@
                     Deleted request
                 </div>
             <%}%>
-
             <div class="containers">
                 <div class="profile-header">
                     <img id="profile-picture" src="data:image/<%=subjectInfo.Object.subjectIcon.contentType%>;base64,<%=subjectInfo.Object.subjectIcon.data.toString('base64')%>" alt="รูปโปรไฟล์">
                 </div>
                 <%- include('./SubjectHeader.ejs')%>
-                <a href="<%=/NewPost/+subjectInfo.Object.id %>" class="btn btn-primary">New Post</a>
             </div>
+            <%- include('../Post/PostList.ejs')%>
         </div>
         <%- include('../partials/footer.ejs')%>
 </body>

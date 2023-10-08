@@ -1,8 +1,10 @@
 const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
-const PostModel = require('../models/PostModel');
 const SubjectModel = require('../models/SubjectModel');
+
+const PostModel = require('../models/PostModel');
+const CommentModel = require('../models/CommentModel');
 
 const page_index = async(req, res,) => {
   const subjects = await getSubjects(req);
@@ -60,17 +62,35 @@ const newPostPage = async(req, res) => {
   res.render('AddPost', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, subject: subject})
 }
 
+const ViewPost = async (req, res) => {
+  const subjects = await getSubjects(req);
+  const postid = req.params.id
+  const newpost = await PostModel.find({_id: postid})
+  const newcomment = await CommentModel.find({post_id: postid})
+  res.render('PostPage', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, allposts: newpost, allcomments: newcomment })
+}
+
 const AddPost = async (req, res) => {
   const sid = req.params.id
   console.log(sid)
   await PostModel.create({
       subject_id: sid,
-      post_name: req.body.postname,
-      post_text: req.body.posttext,
+      post_title: req.body.post_title,
+      content: req.body.content,
       user_id: req.session.loginsession._id,
   })
-  res.redirect('/')
+  res.redirect('/subject/'+sid)
 };
+
+const NewComment = async (req, res) => {
+  const postid = req.params.id
+  await CommentModel.create({
+      post_id: postid,
+      user_id: req.session.loginsession._id,
+      comment: req.body.comment
+  })
+  res.redirect('/post/'+postid)
+}
 
 module.exports = {
   page_index,
@@ -81,5 +101,7 @@ module.exports = {
   logout,
   addSubjectPage,
   newPostPage,
-  AddPost
+  ViewPost,
+  AddPost,
+  NewComment
 }
