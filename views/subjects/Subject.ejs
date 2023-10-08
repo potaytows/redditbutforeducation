@@ -4,13 +4,14 @@
 <head>
     <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
+        <style>
+        </style>
 </head>
 
 <body>
 
     <%- include('../partials/header.ejs')%>
         <div class="container">
-
             <%if(cookies.isLoggedin=="loggedin"){%>
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
@@ -19,6 +20,11 @@
             <%if(cookies.isLoggedout=="true"){%>
                 <div class="alert alert-success" role="alert">
                     Logged out succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.approvedMember=="approved"){%>
+                <div class="alert alert-success" role="alert">
+                    Aproved member request succesfully!!
                 </div>
             <%}%>
             <%if(cookies.addRequest=="Added"){%>
@@ -31,15 +37,16 @@
                     Deleted request
                 </div>
             <%}%>
-            
             <div class="containers">
-                <div class="profile-header">
-                    <img id="profile-picture" src="https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec" alt="รูปโปรไฟล์">
-                </div>
-                <%- include('./SubjectHeader.ejs')%> 
-            </div>
-        
+                <%- include('./SubjectHeader.ejs')%>
+                <%if(subjectInfo.role=="notMember"||subjectInfo.role=="pending"){%>
+                    <h2 class="text-center">Posts are not visable for you.
+                    You are not a member of this subject.</h2>
+                <%}else{%>
+                    <%- include('../Post/PostList.ejs')%>
 
+                    <%}%>
+            </div>
 
         </div>
         <%- include('../partials/footer.ejs')%>
