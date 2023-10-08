@@ -95,7 +95,13 @@ const aboutus = async(req, res) => {
   const subjects = await getSubjects(req);
   res.render('Auth/aboutus', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects:subjects}});
 
-};
+}
+const DeletePost = async(req,res)=>{
+  const postid = req.params.id
+  const result = await PostModel.findOneAndDelete({id:postid})
+  console.log(result)
+  res.redirect('/post/'+postid)
+}
 
 
 
@@ -111,5 +117,6 @@ module.exports = {
   ViewPost,
   AddPost,
   NewComment,
-  aboutus
+  aboutus,
+  DeletePost
 }
