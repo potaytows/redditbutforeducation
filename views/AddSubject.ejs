@@ -27,12 +27,16 @@
               <small>You can leave this blank.</small>
             </div>
             <label for="image">Upload Image</label>
-            <input type="file" id="image" name="image" value="" />
+            <input type="file" class="form-control form-control-lg" id="imageUpload" name="image" value="" accept=".png, .jpg, .jpeg .gif" />
+            <div class="profile-header">
+              <img id="imagePreview" src="" alt="">
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
 
     </div>
     <%- include('./partials/footer.ejs')%>
+    <script language="JavaScript" type="text/javascript" src="/javascripts/profilePreview.js"></script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ var router = express.Router();
 var path = require('path');
 const subjectController = require('../controllers/subjectcontroller');
 const { authChecker } = require('../middleware/AuthChecker');
+const {isAdmin} = require('../middleware/isAdmin')
 
 
 var multer = require('multer');
@@ -28,4 +29,6 @@ router.get('/requesting/:id',subjectController.addJoinRequest)
 router.get('/deleterequest/:id',subjectController.deleteRequest)
 router.get('/req/approve/:id',subjectController.approveRequest)
 router.get('/leaving/:id',authChecker,subjectController.leaveSubject)
+router.get('/:id/management',isAdmin,subjectController.managementPage)
+router.post('/edit/:id',isAdmin,upload.single('image'),subjectController.EditSubject)
 module.exports = router;
