@@ -36,10 +36,10 @@
             </a>
             <ul class="dropdown-menu">
               
-              <%} %>
-              <%if(subjects.length>0){%> 
-                <%subjects.forEach(function(subject){%>
-                  <%if("/subject/"+subject._id!=pageInfo.pageurl){%> 
+              <%}%>
+              <%if(pageInfo.subjects.length>0){%> 
+                <%pageInfo.subjects.forEach(function(subject){%>
+                  <%if("/subject/"+subject._id!= pageInfo.pageurl){%> 
                   <li><a class="dropdown-item" href="/subject/<%=subject.id %>"><%=subject.subjectName%></a></li>
                 <%}})%>
               <%}else{%>

@@ -1,5 +1,5 @@
 const UserModel = require('../models/UserModel');
-
+const getSubject = require('../middleware/getSubjects')
 
 function contains(arr, key, val) {
     for (var i = 0; i < arr.length; i++) {
