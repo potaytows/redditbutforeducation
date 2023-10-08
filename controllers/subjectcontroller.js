@@ -2,6 +2,8 @@ const SubjectModel = require('../models/SubjectModel');
 const subjectMemberModel = require('../models/SubjectMemberModel');
 const UserModel = require('../models/UserModel');
 const JoinRequestModel = require('../models/JoinRequestModel');
+var fs = require('fs');
+var path = require('path');
 const { getSubjects } = require('../middleware/getSubjects')
 
 async function getMemberRole(req, sid) {
@@ -10,7 +12,7 @@ async function getMemberRole(req, sid) {
   if (role) {
     return role.role
   } else {
-    return "isNotMember"
+    return "notMember"
   }
 
 
@@ -24,7 +26,7 @@ const getSubject = async (req, res) => {
     const role = await getMemberRole(req, sid);
     res.render('subjects/Subject', { subjects: subjects, pageInfo: { pageTitle: name, pageType: "Index", pageurl: '/subject/' + req.params.id, subjects: subjects, }, subjectInfo: { Object: subject, role: role } })
 
-  }else{
+  } else {
     res.redirect('/')
   }
 
@@ -34,12 +36,12 @@ const getSubjectMembersPage = async (req, res) => {
   const subjects = await getSubjects(req);
   const sid = req.params.id
   const role = await getMemberRole(req, sid);
-  const members = await subjectMemberModel.find({ subject_id: sid,role:"member" }, { subject: 0, _id: 0 }).populate("user_id")
-  const mods = await subjectMemberModel.find({subject_id:sid,role:{$in:["admin","creator"]}}).populate("user_id")
-  const requests = await subjectMemberModel.find({subject_id:sid,role:"pending"}).populate("user_id")
+  const members = await subjectMemberModel.find({ subject_id: sid, role: "member" }, { subject: 0, _id: 0 }).populate("user_id")
+  const mods = await subjectMemberModel.find({ subject_id: sid, role: { $in: ["admin", "creator"] } }).populate("user_id")
+  const requests = await subjectMemberModel.find({ subject_id: sid, role: "pending" }).populate("user_id")
   const subject = await SubjectModel.findOne({ _id: sid })
 
-  res.render('subjects/SubjectMember', { pageInfo: { pageTitle: subject.subjectName, pageType: "Index", pageurl: '/subject/' + req.params.id + '/members', subjects: subjects }, subjectInfo: { Object: subject, membersList:{mods:mods,members:members,requests:requests}, role: role } })
+  res.render('subjects/SubjectMember', { pageInfo: { pageTitle: subject.subjectName, pageType: "Index", pageurl: '/subject/' + req.params.id + '/members', subjects: subjects }, subjectInfo: { Object: subject, membersList: { mods: mods, members: members, requests: requests }, role: role } })
 }
 
 const addSubjectPage = async (req, res) => {
@@ -49,16 +51,25 @@ const addSubjectPage = async (req, res) => {
 }
 
 const addSubject = async (req, res) => {
-  SubjectModel.create({
+  console.log(req.file)
+  await SubjectModel.create({
     subjectName: req.body.subjectName,
     subjectManager: req.session.loginsession,
-    Description: req.body.Description
+    Description: req.body.Description,
+    subjectIcon:{
+      data:fs.readFileSync(path.join(__dirname+"/../uploads/"+req.file.filename)),
+      contentType:'image/png'
+    }
+
   }).then((result) => {
     subjectMemberModel.create({
       subject_id: result._id,
       user_id: req.session.loginsession._id,
       role: "creator"
+    }).catch((err)=>{
+      console.log(err)
     })
+    
     res.cookie('addingSubject', 'Added', { maxAge: 5000 })
     res.redirect('/')
   })
@@ -78,7 +89,6 @@ const addJoinRequest = async (req, res) => {
 }
 const deleteRequest = async (req, res) => {
   const sid = req.params.id
-
   await subjectMemberModel.findOneAndDelete({
     subject_id: sid,
     user_id: req.session.loginsession._id,
@@ -87,6 +97,40 @@ const deleteRequest = async (req, res) => {
   res.cookie('addRequest', 'Deleted', { maxAge: 5000 })
   res.redirect('/subject/' + sid)
 }
+const approveRequest = async (req, res) => {
+  const rid = req.params.id;
+  await subjectMemberModel.findByIdAndUpdate({ _id: rid }, { $set: { role: "member" } }, { new: true }).then((result) => {
+    res.cookie('approvedMember', 'approved', { maxAge: 3000 })
+    res.redirect('/subject/' + result.subject_id)
+
+  })
+}
+const disApprove = async(req,res)=>{
+  const rid = req.params.id
+  await subjectMemberModel.findOneAndDelete({
+    id:rid,
+    role: "pending"
+  }).then(()=>{
+    res.cookie('Disapproved', 'disapproved', { maxAge: 3000 })
+    res.redirect('/subject/'+sid+'/members')
+
+  })
+}
+const leaveSubject = async (req, res) => {
+  const sid = req.params.id;
+  await subjectMemberModel.findOneAndDelete({
+    subject_id: sid,
+    user_id: req.session.loginsession._id,
+    role: "member"
+  }).then(()=>{
+    res.cookie('Left', 'Left', { maxAge: 3000 })
+    res.redirect('/subject/'+sid)
+
+  })
+
+
+}
+
 
 
 module.exports = {
@@ -95,6 +139,8 @@ module.exports = {
   getSubject,
   getSubjectMembersPage,
   addJoinRequest,
-  deleteRequest
+  deleteRequest,
+  approveRequest,
+  leaveSubject
 
 }

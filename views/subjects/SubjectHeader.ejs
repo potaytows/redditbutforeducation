@@ -1,12 +1,11 @@
 <%=subjectInfo.Object.subjectName%>
-<%=subjectInfo.role%>
 <%if(subjectInfo.role=="member"){%>
     <a type="button" href="/subject/leaving/<%=subjectInfo.Object.id %>" onMouseover="HoveringJoinButt(this)" onMouseout="LeavingTheButt(this)" class="joinedButton btn">Joined</a>
 <%}if(subjectInfo.role=="pending"){%>
   <a type="button" href="/subject/deleterequest/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Waiting for approval</a>
 <%}if(subjectInfo.role=="creator"){%>
   <a type="button" href="" class="btn btn-outline-success disabled" disabled>You are creator of this subject</a>
-<%}else{%>
+<%}if(subjectInfo.role=="notMember"){%>
     <a type="button" href="/subject/requesting/<%=subjectInfo.Object.id %>" class="btn btn-outline-success">Request to join</a>%>
 <%}%>
 <nav class="navbar navbar-expand-lg">
