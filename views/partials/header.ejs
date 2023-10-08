@@ -23,19 +23,17 @@
        
         <%}else{%>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li><a class="nav-link" href="/">Home</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <%if(pageInfo.pageurl!=null){%>
                 <%=subjectInfo.Object.subjectName %>
               </a>
               <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/">Home</a></li>
              <% }else{%>
-              Home
-             
+              Subject List
             </a>
             <ul class="dropdown-menu">
-              
               <%}%>
               <%if(pageInfo.subjects.length>0){%> 
                 <%pageInfo.subjects.forEach(function(subject){%>
@@ -50,9 +48,6 @@
             </ul>
           </li>
         </ul>
-
-
-
         <%}%>
       <%}%>
       

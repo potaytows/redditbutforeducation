@@ -1,4 +1,4 @@
-<%=subjectInfo.Object.subjectName%>
+<h1><%=subjectInfo.Object.subjectName%></h1>
 <%if(subjectInfo.role=="member"){%>
     <a type="button" href="/subject/leaving/<%=subjectInfo.Object.id %>" onMouseover="HoveringJoinButt(this)" onMouseout="LeavingTheButt(this)" class="joinedButton btn">Joined</a>
 <%}if(subjectInfo.role=="pending"){%>

@@ -1,0 +1,13 @@
+<small><%= allcomments %></small>
+<% if(allcomments.length>0) { %>
+    <% allcomments.forEach(acomment => { %>
+        <div class="containers p-3">
+            <h5 style="color: rgb(150, 150, 150); font-weight: 700;">Posted By <%= acomment.user_id %></h5>
+            <span><%= acomment.comment %></span>
+        </div>
+    <% }) %>
+<% } else { %>
+    <div class="containers p-3">
+        <span>No Comment.</span>
+    </div>
+<% } %>    
