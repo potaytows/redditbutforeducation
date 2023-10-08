@@ -92,6 +92,8 @@ const NewComment = async (req, res) => {
   res.redirect('/post/'+postid)
 }
 
+
+
 module.exports = {
   page_index,
   page_login,

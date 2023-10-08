@@ -18,4 +18,5 @@ router.get('/post/:id', authChecker,MainController.ViewPost)
 router.post('/AddPost/:id',MainController.AddPost)
 router.post('/comment/:id',authChecker,MainController.NewComment)
 
+
 module.exports = router;
