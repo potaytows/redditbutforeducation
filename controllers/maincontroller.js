@@ -2,13 +2,16 @@ const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
 const SubjectModel = require('../models/SubjectModel');
+const subjectMemberModel = require('../models/SubjectMemberModel');
 
 const PostModel = require('../models/PostModel');
 const CommentModel = require('../models/CommentModel');
 
 const page_index = async(req, res,) => {
+  const uid = req.session.loginsession
   const subjects = await getSubjects(req);
-  res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects }});
+  const subjectList = await subjectMemberModel.find({user_id:uid, role: { $in: ["admin", "creator","member"] }}).populate("subject_id");
+  res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects },subjectList: subjectList});
 
 };
 
