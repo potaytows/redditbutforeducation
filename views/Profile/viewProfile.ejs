@@ -27,7 +27,7 @@
                             <div class="card mb-4">
                                 <div class="card-body text-center">
                                     <div class="texth1"><h2>Profile</h2></div>
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                    <img src="data:image/<%=user.pfp.contentType%>;base64,<%=user.pfp.data.toString('base64')%>"
                                         alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                                     <h5 class="my-3"><%=user.fname%></h5>
                                     <p class="text-muted mb-3"><%=user.email%></p>
