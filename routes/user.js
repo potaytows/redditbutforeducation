@@ -5,15 +5,15 @@ const usercontroller = require('../controllers/userscontroller')
 
 var multer = require('multer');
 var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-      cb(null, 'uploads')
-  },
-  filename: (req, file, cb) => {
-      cb(null,file.fieldname + '-' + Date.now())
-  }
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
 });
 var upload = multer({ storage: storage });
 
-router.post('/register',upload.single('image'), usercontroller.addnewuser)
-router.post('/uservalidator',usercontroller.validateUser)
+router.post('/register', upload.single('image'), usercontroller.addnewuser)
+router.post('/uservalidator', usercontroller.validateUser)
 module.exports = router;
