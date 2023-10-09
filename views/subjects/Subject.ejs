@@ -42,17 +42,22 @@
             </div>
                 <div class="containers">
                 <%if(subjectInfo.role=="notMember"||subjectInfo.role=="pending"){%>
+                    <div>
                     <h2 class="text-center">Posts are not visable for you.
                     You are not a member of this subject.</h2>
+                    <%- include('../partials/footer_3.ejs')%>
+                </div>
                 <%}else{%>
                     <%- include('../Post/PostList.ejs')%>
 
-                    <%}%>
-            </div>
+                   
+                    
 
+            </div>
+            
         </div>
         <%- include('../partials/footer_2.ejs')%>
-
+        <%}%>
 </body>
 
 </html>

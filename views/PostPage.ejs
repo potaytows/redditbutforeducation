@@ -10,7 +10,13 @@
     <%- include('./partials/header.ejs')%>
     <div class="container">
       <div class="containers">
+        <div class="grid " style="display: grid; grid-template-columns: auto auto;">
         <h1 style="font-weight: bolder;"><%=post.post_title %></h1>
+        <div style="text-align: right; margin-top:0.7pc "><a href="" 
+          style=" background-color: red; color: white; padding: 0.3pc; text-decoration: none; border-radius: 5px;"
+          onMouseOver="this.style.background='gray'"  onMouseOut="this.style.background='red'"
+          >Delete post</a></div>
+        </div>
         <p><%=post.content %></p>
         <br>
         <form method="POST" action="/comment/<%=post._id %>">
@@ -25,7 +31,7 @@
       </div>
       <%- include('Post/CommentList.ejs')%>
     </div>
-    <%- include('./partials/footer.ejs')%>
+    <%- include('./partials/footer_2.ejs')%>
 </body>
 
 </html>
