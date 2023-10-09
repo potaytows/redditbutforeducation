@@ -5,11 +5,37 @@
   <%- include('../partials/head.ejs')%>
     <link href="/stylesheets/style.css" rel="stylesheet">
     <link href="/stylesheets/register.css" rel="stylesheet">
+    <style>
+      .form-signin {
+        background-color: rgb(228, 228, 228);
+        border-radius: 50px;
+        margin: 2pc;
+        box-shadow: 5px 5px 5px gray;
+      }
+
+      .form-signin img {
+        width: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .container{
+        width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 3pc;
+      }
+      .form-select{
+        width: 150px;
+      }
+    </style>
 </head>
 
 <body>
   <%- include('../partials/header.ejs')%>
     <div class="form-signin">
+      <img src="/images/logo.png" alt="">
       <form method="post" action="/user/register" enctype="multipart/form-data">
         <div class="container">
           <%if(cookies.isRegistered=="email_used"){%>
@@ -63,7 +89,7 @@
                 </div>
                 </div>
 
-              <button type="submit" class="btn btn-primary" id="submitbutton" disabled>Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitbutton" disabled>Register</button>
       </form>
     </div>
     
