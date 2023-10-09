@@ -177,6 +177,7 @@ const KickUser = async (req,res)=>{
   res.redirect('/subject/'+sid+'/members') 
 }
 
+
 module.exports = {
   addSubjectPage,
   addSubject,
