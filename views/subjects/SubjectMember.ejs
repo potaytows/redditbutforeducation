@@ -30,7 +30,10 @@
                             <%if(subjectInfo.role=="creator"||subjectInfo.role=="admin") {%>
                                 <h4>Joining requests - <%=subjectInfo.membersList.requests.length%></h4>
                                 <%subjectInfo.membersList.requests.forEach(function(request){%>
-                                    <%=request.user_id.email %><a type="button" class="btn btn-success"  href="/subject/req/approve/<%=request.id%>">Approve</a>
+                                    <%=request.user_id.email %>
+                                    <%=request.user_id.fname%><%=request.user_id.lname%>
+                                    <br>
+                                    <a type="button" class="btn btn-success"  href="/subject/req/approve/<%=request.id%>">Approve</a>
                                     <a type="button" class="btn btn-danger"  href="/subject/deleterequest/<%=request.id%>">Decline</a>
                                 <%}) %>
                                 

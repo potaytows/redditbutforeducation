@@ -68,7 +68,7 @@ const newPostPage = async(req, res) => {
 const ViewPost = async (req, res) => {
   const subjects = await getSubjects(req);
   const postid = req.params.id
-  const post = await PostModel.findOne({_id: postid})
+  const post = await PostModel.findOne({_id: postid}).populate("user_id",'-password')
   const comments = await CommentModel.find({post_id: postid}).populate("user_id",'-password')
   res.render('PostPage', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, post: post, allcomments: comments })
 }
@@ -98,7 +98,14 @@ const aboutus = async(req, res) => {
   const subjects = await getSubjects(req);
   res.render('Auth/aboutus', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects:subjects}});
 
-};
+}
+const DeletePost = async(req,res)=>{
+  const postid = req.params.id
+  const sid = req.params.sid
+  const result = await PostModel.findByIdAndRemove({_id:postid})
+  console.log(result)
+  res.redirect('/subject/'+sid)
+}
 
 
 
@@ -114,5 +121,6 @@ module.exports = {
   ViewPost,
   AddPost,
   NewComment,
-  aboutus
+  aboutus,
+  DeletePost
 }
