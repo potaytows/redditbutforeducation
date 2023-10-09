@@ -25,7 +25,7 @@ const getSubject = async (req, res) => {
   if (subject) {
     const name = subject.subjectName
     const role = await getMemberRole(req, sid);
-    const posts = await PostModel.find({subject_id:sid}).populate("user_id","-password")
+    const posts = await PostModel.find({subject_id:sid}).populate("user_id","-password").sort({"createdAt":-1})
     res.render('subjects/Subject', { allposts : {posts,moment}, subjects: subjects, pageInfo: { pageTitle: name, pageType: "Index", pageurl: '/subject/' + req.params.id, subjects: subjects, }, subjectInfo: { Object: subject, role: role } })
   } else {
     res.redirect('/')
