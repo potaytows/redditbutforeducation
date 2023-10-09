@@ -18,7 +18,7 @@ router.get('/post/:id',authChecker, authChecker,MainController.ViewPost)
 router.post('/AddPost/:id',authChecker,MainController.AddPost)
 router.post('/comment/:id',authChecker,MainController.NewComment)
 router.get('/aboutus',MainController.aboutus)
-router.get('/post/delete/:id',authChecker,MainController.DeletePost)
+router.get('/post/delete/:id/:sid',authChecker,MainController.DeletePost)
 
 
 module.exports = router;
