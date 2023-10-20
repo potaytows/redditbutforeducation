@@ -30,12 +30,14 @@
         width: 150px;
       }
     </style>
+
 </head>
 
 <body>
   <%- include('../partials/header.ejs')%>
     <div class="form-signin">
       <img src="/images/logo.png" alt="">
+
       <form method="post" action="/user/register" enctype="multipart/form-data">
         <div class="container">
           <%if(cookies.isRegistered=="email_used"){%>
@@ -68,6 +70,25 @@
                   <option value="Other">Other</option>
                 </select>
               </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="fname1" class="form-label">Firstname</label>
+                  <input type="text" name="fname" class="form-control" id="fname1" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lname1" class="form-label">Lastname</label>
+                  <input type="text" name="lname" class="form-control" id="lname1" required>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <select class="form-select" name="gender">
+                  <option disabled selected>Gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
               <div class="mb-3">
                 <label for="pwd1" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="pwd1" required>
@@ -88,8 +109,8 @@
                   <img id="imagePreview" >
                 </div>
                 </div>
-
               <button type="submit" class="btn btn-primary" id="submitbutton" disabled>Register</button>
+
       </form>
     </div>
     
