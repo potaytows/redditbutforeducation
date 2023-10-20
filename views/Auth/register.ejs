@@ -3,13 +3,11 @@
 
 <head>
   <%- include('../partials/head.ejs')%>
-    <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/register.css" rel="stylesheet">
+      <link href="/stylesheets/style.css" rel="stylesheet">
 </head>
 
-<body>
-  <%- include('../partials/header.ejs')%>
-    <div class="form-signin">
+  <body>
+    <%- include('../partials/header.ejs')%>
       <form method="post" action="/user/register" onsubmit="">
         <div class="container">
           <%if(cookies.isRegistered=="email_used"){%>
@@ -42,6 +40,7 @@
                   <option value="Other">Other</option>
                 </select>
               </div>
+              
               <div class="mb-3">
                 <label for="pwd1" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="pwd1" required>
@@ -55,8 +54,9 @@
               <button type="submit" class="btn btn-primary" id="submitbutton" disabled>Submit</button>
       </form>
     </div>
-    <%- include('../partials/footer.ejs')%>
+    
       <script src="/javascripts/passwordvalidator.js"></script>
+      <script language="JavaScript" type="text/javascript" src="/javascripts/profilePreview.js"></script>
 </body>
 
 </html>
