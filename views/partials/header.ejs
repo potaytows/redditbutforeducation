@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Reddeetznuts</a>
+    <a class="navbar-brand" href="/">
+    <img class="img-fluid" src="/images/logo.png" alt="" width="100"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -23,23 +24,21 @@
        
         <%}else{%>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li><a class="nav-link" href="/">Home</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <%if(pageInfo.pageurl!=null){%>
                 <%=subjectInfo.Object.subjectName %>
               </a>
               <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/">Home</a></li>
              <% }else{%>
-              Home
-             
+              Subject List
             </a>
             <ul class="dropdown-menu">
-              
-              <%} %>
-              <%if(subjects.length>0){%> 
-                <%subjects.forEach(function(subject){%>
-                  <%if("/subject/"+subject._id!=pageInfo.pageurl){%> 
+              <%}%>
+              <%if(pageInfo.subjects.length>0){%> 
+                <%pageInfo.subjects.forEach(function(subject){%>
+                  <%if("/subject/"+subject._id!= pageInfo.pageurl){%> 
                   <li><a class="dropdown-item" href="/subject/<%=subject.id %>"><%=subject.subjectName%></a></li>
                 <%}})%>
               <%}else{%>
@@ -50,17 +49,14 @@
             </ul>
           </li>
         </ul>
-
-
-
         <%}%>
       <%}%>
       
       <ul class="nav navbar-nav flex-fill justify-content-center">
         <li class="nav-item">
           <div class="indexsearchbar">
-            <form class="d-flex " role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex " role="search" action="/search" method="GET" >
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="qry" required>
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
@@ -73,6 +69,7 @@
               <%=sessions.loginsession.email %>
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/viewProfile">Profile</a></li>
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
           </li>

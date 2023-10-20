@@ -1,0 +1,68 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: rgb(241, 219, 210);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+#detail
+{
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    color: gray;
+}
+    </style>
+ 
+  </head> 
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  
+  <%- include('../partials/head.ejs')%>
+
+<body>
+  <%- include('../partials/header.ejs')%>
+  
+  
+  <header style="background-image: url('/images/bg.png');">
+    <img class="img-fluid" src="/images/logo.png" alt="" width="200">
+    <h1 style="color: gray;">About Us</h1>
+    <div id="detail">
+      BokBooK is an educational website that can be used to disseminate information about schools or universities. Course details, application instructions, maps and contact information and other information. Education websites provide convenient access to educational information and create a channel of communication between a school or university and members of the educational community, both internal and external.
+    </div>
+  </header>
+
+  
+  <%- include('../partials/footer.ejs')%>
+</body>
+
+</html>

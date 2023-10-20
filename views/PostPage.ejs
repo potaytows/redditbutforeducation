@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs')%>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('./partials/header.ejs')%>
+    <div class="container">
+      <div class="containers">
+        <div class="grid " style="display: grid; grid-template-columns: auto auto;">
+        <h1 style="font-weight: bolder;"><%=post.post_title %></h1>
+
+        <%if(sessions.loginsession.email==post.user_id.email){%>
+        <div style="text-align: right; margin-top:0.7pc ">
+          <a type="button" class="promoteLink" data-bs-toggle="modal" data-bs-target="#modalPost" style=" background-color: red; color: white; padding: 0.3pc; text-decoration: none; border-radius: 5px;"
+          onMouseOver="this.style.background='gray'"  onMouseOut="this.style.background='red'">
+            Delete
+        </a>
+        
+        
+        </div>
+
+          <div class="modal fade" id="modalPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Delete this post?</h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              <a type="button" class=" btn btn-primary"  href="/post/delete/<%=post._id%>/<%=post.subject_id%>">confirm</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+        
+        <%}%>
+      </div>
+        <p><%=post.content %></p>
+        <br>
+        <form method="POST" action="/comment/<%=post._id %>">
+          <div class="form-group mb-3">
+            <label for="Text" class="form-label">Comment : </label>
+            <textarea class="form-control" rows="3" placeholder="Comment." id="Text" name="comment" required></textarea>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Post</button>
+          </div>
+        </form>
+      </div>
+      <%- include('Post/CommentList.ejs')%>
+    </div>
+    <%- include('./partials/footer_2.ejs')%>
+</body>
+
+</html>

@@ -1,4 +1,3 @@
-
 const pwd1 = document.getElementById('pwd1');
 const pwd2 = document.getElementById('pwd2');
 const email = document.getElementById('emailinput')
@@ -63,6 +62,7 @@ async function main() {
     }
 
     function emailvalidation() {
+        console.log(email.value)
         if (mail.includes(email.value)) {
             isNotUsed = false;
             document.getElementById("evalid").innerHTML = "The email has already been used!";

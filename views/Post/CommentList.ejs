@@ -1,0 +1,34 @@
+<html>
+<style>
+    .hover:hover{
+        color: red;
+    }
+</style>
+<% if(allcomments.length>0) { %>
+    <% allcomments.forEach(acomment=> { %>
+        <div class="containers p-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 style="color: rgb(150, 150, 150); font-weight: 700;">
+                        <%= acomment.user_id.email %>
+                    </h5>
+                    <p>
+                        <%= acomment.comment %>
+                    </p>
+                </div>
+            </div>
+            <%if(sessions.loginsession.email==acomment.user_id.email){%>
+            <div class="hover" style="text-align: right;"><a href="" style="text-decoration: none; color: red;" 
+                onMouseOver="this.style.color='gray'"  onMouseOut="this.style.color='red'">
+                Delete Comment</a>
+            </div>
+            <%}%>
+
+        </div>
+        <% }) %>
+            <% } else { %>
+                <div class="containers p-3">
+                    <span>No Comment.</span>
+                </div>
+                <% } %>
+                </html>

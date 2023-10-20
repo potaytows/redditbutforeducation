@@ -4,28 +4,60 @@
 <head>
     <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
+        <style>
+        </style>
 </head>
 
 <body>
 
     <%- include('../partials/header.ejs')%>
         <div class="container">
-
             <%if(cookies.isLoggedin=="loggedin"){%>
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
                 </div>
-                <%}%>
-                    <%if(cookies.isLoggedout=="true"){%>
-                        <div class="alert alert-success" role="alert">
-                            Logged out succesfully!!
-                        </div>
-                        <%}%>
-                            <%- include('./SubjectHeader.ejs')%>
+            <%}%>
+            <%if(cookies.isLoggedout=="true"){%>
+                <div class="alert alert-success" role="alert">
+                    Logged out succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.approvedMember=="approved"){%>
+                <div class="alert alert-success" role="alert">
+                    Aproved member request succesfully!!
+                </div>
+            <%}%>
+            <%if(cookies.addRequest=="Added"){%>
+                <div class="alert alert-success" role="alert">
+                    Requested joining
+                </div>
+            <%}%>
+            <%if(cookies.addRequest=="Deleted"){%>
+                <div class="alert alert-success" role="alert">
+                    Deleted request
+                </div>
+            <%}%>
+            <div class="containers ">
+                <%- include('./SubjectHeader.ejs')%>
+            </div>
+                <div class="containers">
+                <%if(subjectInfo.role=="notMember"||subjectInfo.role=="pending"){%>
+                    <div>
+                    <h2 class="text-center">Posts are not visable for you.
+                    You are not a member of this subject.</h2>
+                    <%- include('../partials/footer_3.ejs')%>
+                </div>
+                <%}else{%>
+                    <%- include('../Post/PostList.ejs')%>
 
+                   
+                    
 
+            </div>
+            
         </div>
-        <%- include('../partials/footer.ejs')%>
+        <%- include('../partials/footer_2.ejs')%>
+        <%}%>
 </body>
 
 </html>
