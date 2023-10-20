@@ -3,14 +3,12 @@
 
 <head>
   <%- include('../partials/head.ejs')%>
-    <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/register.css" rel="stylesheet">
+      <link href="/stylesheets/style.css" rel="stylesheet">
 </head>
 
-<body>
-  <%- include('../partials/header.ejs')%>
-    <div class="form-signin">
-      <form method="post" action="/user/register" enctype="multipart/form-data">
+  <body>
+    <%- include('../partials/header.ejs')%>
+      <form method="post" action="/user/register" onsubmit="">
         <div class="container">
           <%if(cookies.isRegistered=="email_used"){%>
             <div class="alert alert-danger" role="alert">
@@ -53,17 +51,6 @@
                 <input type="password" class="form-control" id="pwd2" required>
                 <p id="pvalid2" class="mt-2 text-center" style="font-size:12px;color:red;"></p>
               </div>
-              <div class="from-group mb-3 col-6">
-                <label for="image">Upload Image</label>
-                <input type="file" class="form-control form-control-sm mt-5" id="imageUpload" name="image" value="" accept=".png, .jpg, .jpeg .gif" required />
-              </div>
-                <div class="col-md-6">
-                Subject Icon Preview
-                <div class="profile-header mt-3">
-                  <img id="imagePreview" >
-                </div>
-                </div>
-
               <button type="submit" class="btn btn-primary" id="submitbutton" disabled>Submit</button>
       </form>
     </div>
