@@ -4,6 +4,62 @@
 <head>
     <%- include('./partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
+        <style>
+            .grid {
+                display: grid;
+                grid-template-columns: 30% 30% 30%;
+                gap: 0;
+                justify-content: center;
+            }
+
+            .pagination_manu {
+                margin-top: 2pc;
+            }
+
+
+            @media only screen and (max-width: 992px) {
+                .grid {
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    gap: 1pc;
+                }
+            }
+
+            @media only screen and (max-width: 600px) {
+                .grid {
+                    display: grid;
+                    grid-template-columns: auto;
+                    gap: 1pc;
+                }
+
+            }
+
+            .card img {
+                width: 100%;
+                height: 250px;
+                overflow: hidden;
+                background-repeat: no-repeat;
+                background-position: center;
+
+            }
+
+            .card {
+                width: 80%;
+                display: block;
+                margin: auto;
+                padding: auto;
+                margin-top: 1.5pc;
+                margin-bottom: 2pc;
+                border: 1px solid rgb(202, 201, 201);
+            }
+
+            .block p {
+                text-align: center;
+                position: fixed;
+                top: 50%;
+                left: 47%;
+            }
+        </style>
 </head>
 
 <body>
@@ -14,27 +70,58 @@
                 <div class="alert alert-success" role="alert">
                     Logged in succesfully!!
                 </div>
-            <%}%>
-            <%if(cookies.isLoggedout=="true"){%>
-                <div class="alert alert-success" role="alert">
-                    Logged out succesfully!!
-                </div>
-            <%}%>
-            <%if(cookies.addingSubject=="Added"){%>
-                <div class="alert alert-success" role="alert">
-                    Added Subject succesfully!
-                </div>
-            <%}%>
-            <%if(cookies.notAdmin=="notAdmin"){%>
-                <div class="alert alert-danger" role="alert">
-                    You are not an admin!!
-                </div>
-            <%}%>
+                <%}%>
+                    <%if(cookies.isLoggedout=="true"){%>
+                        <div class="alert alert-success" role="alert">
+                            Logged out succesfully!!
+                        </div>
+                        <%}%>
+                            <%if(cookies.addingSubject=="Added"){%>
+                                <div class="alert alert-success" role="alert">
+                                    Added Subject succesfully!
+                                </div>
+                                <%}%>
+                                    <%if(cookies.notAdmin=="notAdmin"){%>
+                                        <div class="alert alert-danger" role="alert">
+                                            You are not an admin!!
+                                        </div>
+                                        <%}%>
 
+                                        <% if (subjectList.length === 0) { %>
+                                            <div class="block">
+                                                <p class="textshow">ไม่มีรายวิชาที่เข้าร่วม</p>
+                                            </div>
+                                            <%- include('./partials/footer_3.ejs')%>
+                            <% } else { %>
+                                        
+                                            <h2 style="text-align: center; margin-top: 1.8pc; border: 1px solid gray; color: white; background-color:gray ;">Your Subject</h2>
+                                            <div style="border: 1px solid rgb(189, 189, 189);">
 
+                                        <div id="searchResults" class="grid">
 
+                                                <% subjectList.forEach((subject) => { %>
+                                                    <div class="card">
+
+                                                        <img src="data:image/<%= subject.subject_id.contentType %>;base64,<%= subject.subject_id.subjectIcon.data.toString('base64') %>"
+                                                            class="card-img-top" alt="">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><%= subject.subject_id.subjectName %></h5>
+                                                            <p class="card-text"><%= subject.subject_id.Description %></p>
+                                                            <hr>
+                                                            <a href="/subject/<%= subject.subject_id.id %>" class="btn btn-primary">Visit Subject</a>
+                                                        </div>
+                                                    </div>
+                                                    <% }); %>
+      
+
+                                            </div>
+                                        </div>          
         </div>
-        <%- include('./partials/footer.ejs')%>
+        <%- include('./partials/footer_2.ejs')%>
+        <% } %>
+
+
+                                           
 </body>
 
 </html>

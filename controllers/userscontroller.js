@@ -1,17 +1,31 @@
 const UserModel = require('../models/UserModel');
 const getSubject = require('../middleware/getSubjects')
+var fs = require('fs');
+var path =require('path')
 
 function contains(arr, key, val) {
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i][key] === val) return true;
+        if (arr[i][key] === val) return true;
     }
     return false;
-  }
-const addnewuser = (req, res, next) => {
-    UserModel.find({}, { 'email': 1, '_id': 0 })    
+}
+const addnewuser = async(req, res, next) => {
+    await UserModel.find({}, { 'email': 1, '_id': 0 })
         .then((result) => {
-            if (!contains(result,"email",req.body.email)) {
-                const newuser = new UserModel(req.body)
+            if (!contains(result, "email", req.body.email)) {
+                const newuser = new UserModel({
+                    email: req.body.email,
+                    password: req.body.password,
+                    fname: req.body.fname,
+                    lname: req.body.lname,
+                    gender: req.body.gender,
+                    pfp: {
+                        data: fs.readFileSync(path.join(__dirname + "/../uploads/" + req.file.filename)),
+                        contentType: 'image/png'
+                    }
+
+
+                })
                 newuser.save().then((result) => {
                     res.cookie('isRegistered', 'registered', { maxAge: 5000 })
                     res.redirect('/login')
@@ -20,7 +34,7 @@ const addnewuser = (req, res, next) => {
                     console.log(err)
                 })
 
-            }else{
+            } else {
                 res.cookie('isRegistered', 'email_used', { maxAge: 5000 })
                 res.redirect('/register')
 

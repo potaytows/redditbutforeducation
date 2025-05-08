@@ -2,13 +2,16 @@ const {getSubjects} = require('../middleware/getSubjects');
 const { authChecker } = require('../middleware/AuthChecker');
 const UserModel = require('../models/UserModel');
 const SubjectModel = require('../models/SubjectModel');
+const subjectMemberModel = require('../models/SubjectMemberModel');
 
 const PostModel = require('../models/PostModel');
 const CommentModel = require('../models/CommentModel');
 
 const page_index = async(req, res,) => {
+  const uid = req.session.loginsession
   const subjects = await getSubjects(req);
-  res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects }});
+  const subjectList = await subjectMemberModel.find({user_id:uid, role: { $in: ["admin", "creator","member"] }}).populate("subject_id");
+  res.render('index', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "index", subjects: subjects },subjectList: subjectList});
 
 };
 
@@ -65,7 +68,7 @@ const newPostPage = async(req, res) => {
 const ViewPost = async (req, res) => {
   const subjects = await getSubjects(req);
   const postid = req.params.id
-  const post = await PostModel.findOne({_id: postid})
+  const post = await PostModel.findOne({_id: postid}).populate("user_id",'-password')
   const comments = await CommentModel.find({post_id: postid}).populate("user_id",'-password')
   res.render('PostPage', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects: subjects  }, post: post, allcomments: comments })
 }
@@ -91,6 +94,20 @@ const NewComment = async (req, res) => {
   })
   res.redirect('/post/'+postid)
 }
+const aboutus = async(req, res) => {
+  const subjects = await getSubjects(req);
+  res.render('Auth/aboutus', { pageInfo: { pageTitle: 'Reddeetznuts', pageType: "Index", subjects:subjects}});
+
+}
+const DeletePost = async(req,res)=>{
+  const postid = req.params.id
+  const sid = req.params.sid
+  const result = await PostModel.findByIdAndRemove({_id:postid})
+  console.log(result)
+  res.redirect('/subject/'+sid)
+}
+
+
 
 module.exports = {
   page_index,
@@ -103,5 +120,7 @@ module.exports = {
   newPostPage,
   ViewPost,
   AddPost,
-  NewComment
+  NewComment,
+  aboutus,
+  DeletePost
 }

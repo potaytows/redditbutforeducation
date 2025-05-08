@@ -4,6 +4,29 @@
 <head>
     <%- include('../partials/head.ejs')%>
         <link href="/stylesheets/style.css" rel="stylesheet">
+        <style>
+.log{
+  background-color: rgb(228, 228, 228);  
+  border-radius: 50px;
+  margin: 2pc;
+  box-shadow: 5px 5px 5px gray;
+
+}
+.log img{
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 3pc;
+}
+
+        </style>
 </head>
 
 <body>
@@ -24,14 +47,16 @@
                                     Please Log in first!!
                                 </div>
                                 <%}%>
-
+                                <div class="log">
+                                    <img src="/images/logo.png" alt="">
+                                    <div class="form">
                                     <form method="post" action="/user/uservalidator">
                                         <div class="container">
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                                                 <input type="email" name="email" class="form-control"
                                                     id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                                                <div id="emailHelp" class="form-text">We'll never share your email with
+                                                <div id="emailHelp" class="form-text" >We'll never share your email with
                                                     anyone else.</div>
                                             </div>
                                             <div class="mb-3">
@@ -40,11 +65,12 @@
                                                 <input type="password" name="password" class="form-control"
                                                     id="exampleInputPassword1">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">Sign-In</button>
                                     </form>
+                                </div>
+                                </div>
         </div>
         </div>
-        <%- include('../partials/footer.ejs')%>
 </body>
 
 </html>

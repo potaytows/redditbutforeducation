@@ -1,3 +1,9 @@
+<html>
+<style>
+    .hover:hover{
+        color: red;
+    }
+</style>
 <% if(allcomments.length>0) { %>
     <% allcomments.forEach(acomment=> { %>
         <div class="containers p-3">
@@ -11,6 +17,13 @@
                     </p>
                 </div>
             </div>
+            <%if(sessions.loginsession.email==acomment.user_id.email){%>
+            <div class="hover" style="text-align: right;"><a href="" style="text-decoration: none; color: red;" 
+                onMouseOver="this.style.color='gray'"  onMouseOut="this.style.color='red'">
+                Delete Comment</a>
+            </div>
+            <%}%>
+
         </div>
         <% }) %>
             <% } else { %>
@@ -18,3 +31,4 @@
                     <span>No Comment.</span>
                 </div>
                 <% } %>
+                </html>
